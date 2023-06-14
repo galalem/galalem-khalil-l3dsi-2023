@@ -1,0 +1,11 @@
+<app-dialog #dialog>
+  <ng-container dialog-title>
+    <ng-content select="[dialog-title]"></ng-content>
+    {{data.title}}
+  </ng-container>
+  <ng-content></ng-content>
+  <div [innerHTML]="data.body"></div>
+  <ng-container dialog-actions>
+    <button class="ml-1 btn btn-sm btn-info" (click)="dialog.close()">OK</button>
+  </ng-container>
+</app-dialog>

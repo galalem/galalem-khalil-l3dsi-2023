@@ -1,0 +1,36 @@
+<aside class="main-sidebar sidebar-dark-primary">
+    <!-- Brand Logo -->
+    <a href="javascript:;" class="brand-link">
+        <img src="assets/img/logo.png" alt="Logo" class="brand-image" style="max-height: 30px; margin-top: 0;">
+<!--         <img [src]="establishment.logo | secure | async" alt="Logo" class="brand-image" style="max-height: 30px; margin-top: 0;">
+ -->        <span class="brand-text">{{establishment.name}}</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li *ngFor="let item of items" class="nav-item" [class.menu-open]="item.submenu && item.isOpen">
+                <a [routerLink]="item.submenu ? undefined : item.routerLink" class="nav-link" routerLinkActive="active" (click)="item.isOpen = !item.isOpen">
+                    <ngx-fa-icon class="nav-icon text-center" [icon]="item.icon" style="display: inline-block; width:1.5em"></ngx-fa-icon>
+                    <p>
+                        {{item.label}}
+                        <ngx-fa-icon *ngIf="item.submenu" class="right" icon="angle-down"></ngx-fa-icon>
+                    </p>
+                </a>
+                <ul *ngIf="item.submenu" class="nav nav-treeview">
+                    <li *ngFor="let subitem of item.submenu" class="nav-item">
+                        <a [routerLink]="subitem.routerLink" class="nav-link" routerLinkActive="active">
+                            <ngx-fa-icon class="nav-icon text-center" [icon]="subitem.icon" style="display: inline-block; width:1.5em"></ngx-fa-icon>
+                            <p>{{subitem.label}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

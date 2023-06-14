@@ -1,0 +1,5 @@
+<div class="alert alert-{{type}} alert-dismissible" [class.hidden]="!open">
+  <app-button type="button" class="close" data-dismiss="alert" aria-hidden="true" (click)="close.emit(); open = false">&times;</app-button>
+  <h5><span app-icon [icon]="icon" style="display: inline-block; width: 1.5em; text-align: center;"></span>{{title}}</h5>
+  <div [innerHTML]="message"></div>
+</div>

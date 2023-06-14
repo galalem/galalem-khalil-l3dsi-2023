@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-9 offset-lg-3 col-12 px-lg-5 px-md-4 px-sm-3 mt-3">
+        <h2 class="mb-1">Identité</h2>
+        <hr>
+        <div class="row pt-3">
+            <div class="col-3">
+                <h6 class="text-muted text-sm mb-1">Sexe</h6>
+                <div class="text-lg"><ngx-fa-icon class="mr-1"
+                        [icon]="entity.gender == FEMALE ? 'venus' : 'mars'"></ngx-fa-icon> {{entity.localeGender()}}
+                </div>
+            </div>
+            <div class="col-5">
+                <simple-text-details title="Prénom" [text]="entity.firstName"></simple-text-details>
+            </div>
+            <div class="col-4">
+                <simple-text-details title="Nom" [text]="entity.lastName"></simple-text-details>
+            </div>
+            <div class="col-12 mt-3">
+                <simple-text-details title="Date et Lieu de naissance"
+                    [text]="'le ' + entity.formattedDateOfBirth() + ' à ' + entity.placeOfBirth"></simple-text-details>
+            </div>
+            <div class="col-12 mt-3">
+                <simple-text-details title="Nationalité" icon="earth" [text]="entity.formattedNationality()"></simple-text-details>
+            </div>
+            <div class="col-12 mt-3">
+                <simple-text-details title="Pièce d'Identité" icon="id-card"
+                    [text]="entity.localeIdType() + ' No. ' + entity.idNumber + ' délivrée le ' + entity.formattedIdDateOfIssue() + ' à ' + entity.idPlaceOfIssue">
+                </simple-text-details>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+<ion-menu content-id="main-content" #ionMenu>
+  <ion-header>
+    <ion-toolbar mode="md">
+      <ion-buttons slot="start">
+        <img slot="start" src="assets/img/logo/logo.png">
+      </ion-buttons>
+      <ion-title>GSING</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-toggle>
+          <ion-button><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
+        </ion-menu-toggle>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list class="ion-padding">
+
+      <context-menu class="btn-group w-100" [(context)]="context" 
+        [disabled]="usesContext === null" [hidden]="usesContext === false">
+      </context-menu>
+
+      <ion-item routerLink="/home" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+        <ngx-fa-icon icon="gauge-high" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Tableau de bord
+        </ion-label>
+      </ion-item>
+      <ion-item routerLink="/news" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+        <ngx-fa-icon icon="newspaper" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Actualités
+        </ion-label>
+      </ion-item>
+      <ion-item button lines="none" detail="false" class="menu-toggle" [class.active]="hr.expanded"
+        (click)="hr.expanded = !hr.expanded">
+        <ngx-fa-icon icon="user-group" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Resources Humaines
+        </ion-label>
+        <ngx-fa-icon icon="chevron-down" slot="end" [flip]="hr.expanded ? 'vertical' : undefined"></ngx-fa-icon>
+      </ion-item>
+      <mat-expansion-panel #hr>
+        <ion-list>
+          <ion-item routerLink="/human-resources/teachers" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-tie" slot="start"></ngx-fa-icon>
+            <ion-label>
+              Enseignants
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/human-resources/students" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-graduate" slot="start"></ngx-fa-icon>
+            <ion-label>
+              Élèves
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/human-resources/parents" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-shield" slot="start"></ngx-fa-icon>
+            <ion-label>
+              Parents
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/human-resources/staff" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-gear" slot="start"></ngx-fa-icon>
+            <ion-label>
+              Personnels
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+      <ion-item routerLink="/schooling" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+        <ngx-fa-icon icon="graduation-cap" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Scolarité
+        </ion-label>
+      </ion-item>
+<ng-container>
+      <ion-item button lines="none" detail="false" class="menu-toggle" [class.active]="schedule.expanded"
+        (click)="schedule.expanded = !schedule.expanded">
+        <ngx-fa-icon icon="calendar-days" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Emploi de temps
+        </ion-label>
+        <ngx-fa-icon icon="chevron-down" slot="end" [flip]="schedule.expanded ? 'vertical' : undefined"></ngx-fa-icon>
+      </ion-item>
+      <mat-expansion-panel #schedule>
+        <ion-list>
+          <ion-item routerLink="/schedule/classes" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-group" slot="start"></ngx-fa-icon>
+            <ion-label>
+              par Classe
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/schedule/students" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-graduate" slot="start"></ngx-fa-icon>
+            <ion-label>
+              par Élève
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/schedule/teachers" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="user-tie" slot="start"></ngx-fa-icon>
+            <ion-label>
+              par Enseignant
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/schedule/places" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="people-roof" slot="start"></ngx-fa-icon>
+            <ion-label>
+              par Salle
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+</ng-container>
+      <ion-item routerLink="/schedule/user" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+        <ngx-fa-icon icon="calendar-days" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Emploi de temps
+        </ion-label>
+      </ion-item>
+
+      <ion-item button lines="none" detail="false" class="menu-toggle" [class.active]="administration.expanded"
+        (click)="administration.expanded = !administration.expanded">
+        <ngx-fa-icon icon="landmark" slot="start"></ngx-fa-icon>
+        <ion-label>
+          Administration
+        </ion-label>
+        <ngx-fa-icon icon="chevron-down" slot="end"
+          [flip]="administration.expanded ? 'vertical' : undefined"></ngx-fa-icon>
+      </ion-item>
+      <mat-expansion-panel #administration>
+        <ion-list>
+          <ion-item routerLink="/administration/establishment" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="school" slot="start"></ngx-fa-icon>
+            <ion-label>
+              Établissement
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/administration/departments" (click)="ionMenu.close()" routerLinkActive="active" lines="none" detail="false">
+            <ngx-fa-icon icon="hotel" slot="start"></ngx-fa-icon>
+            <ion-label>
+              Départements
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar mode="md">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{document.title}}</ion-title>
+      <ion-buttons slot="end">
+        <!-- Notifications Dropdown Menu -->
+        <button class="btn" [matMenuTriggerFor]="notificationsMenu.menu">
+          <ngx-fa-icon icon="bell"></ngx-fa-icon>
+          <span class="badge badge-warning navbar-badge" *ngIf="notifications > 0">{{notifications}}</span>
+        </button>
+        <dropdown-menu #notificationsMenu="dropdown" xPosition="before" [items]="notificationsDropdownItems">
+          <div dropdown-header>
+            <span class="dropdown-item dropdown-header">{{notifications}} Notifications</span>
+          </div>
+        </dropdown-menu>
+        <!-- Userpanel Dropdown Menu -->
+        <button class="btn" [matMenuTriggerFor]="userPanelMenu.menu">
+          <profile-picture [src]="userinfo.picture" [gender]="userinfo.gender" class-native="img-circle"
+            style-native="height:1.7em; aspect-ratio: 1/1; display: inline-block;" />
+        </button>
+        <dropdown-menu #userPanelMenu="dropdown" xPosition="before" [items]="userPanelDropdownItems">
+          <div class="user-panel" dropdown-header>
+            <profile-picture [src]="userinfo.picture" [gender]="userinfo.gender" class="image"
+              class-native="img-circle elevation-2"></profile-picture>
+            <div class="info">
+              <div style="font-weight: 500; font-size: 1.2em;">{{userinfo.name}}</div>
+              <div style="font-weight: 300;">{{userinfo.role}}</div>
+            </div>
+          </div>
+        </dropdown-menu>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content style="--background: #f4f6f9">
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ngx-preloader></ngx-preloader>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+</div>

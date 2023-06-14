@@ -1,0 +1,118 @@
+<ion-modal #modal mode="ios" [trigger]="trigger" [initialBreakpoint]="1" [breakpoints]="[0, 1]" (willPresent)="start()">
+    <ng-template>
+        <ion-header>
+            <ion-toolbar *ngIf="mode === 'comments'">
+                <ion-label>
+                    <img *ngIf="topReactions.length > 2" [src]="topReactions[2]" style="z-index: 3;" class="reactions-stat-img">
+                    <img *ngIf="topReactions.length > 1" [src]="topReactions[1]" style="z-index: 2;" class="reactions-stat-img">
+                    <img *ngIf="topReactions.length > 0" [src]="topReactions[0]" style="z-index: 1;" class="reactions-stat-img mr-1">
+                    {{topReactions.length > 0 ? formatNumbers(reactions[0][1]) : "Soyez le premier à aimer"}}
+                </ion-label>
+                <ion-buttons slot="end">
+                    <ion-button (click)="mode = 'reactions'">
+                        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-toolbar *ngIf="mode === 'reactions'">
+                <ion-buttons slot="start">
+                    <ion-button (click)="mode = 'comments'">
+                        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-label>
+                    {{commentsNumber > 0 ? commentsNumber + ' commentaires' : "Soyez le premier à commenter"}}
+                </ion-label>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+            <mat-tab-group [selectedIndex]="mode == 'reactions' ? 1 : 0" class="hide-tabs">
+                <mat-tab>
+                    <comment-item *ngFor="let skeleton of commentsPlaceholders" [placeholder]="true"></comment-item>
+                    <comment-item *ngFor="let comment of comments" [data]="comment" (answer)="answering = $event"></comment-item>
+                </mat-tab>
+                <mat-tab> 
+                    <mat-tab-group>
+                        <mat-tab [label]="'Tous ' + formatNumbers(reactions[0][1])">
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[0]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[0]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 1">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[1][0] + '.png'">
+                                {{formatNumbers(reactions[1][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[1]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[1]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 2">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[2][0] + '.png'">
+                                {{formatNumbers(reactions[2][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[2]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[2]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 3">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[3][0] + '.png'">
+                                {{formatNumbers(reactions[3][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[3]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[3]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 4">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[4][0] + '.png'">
+                                {{formatNumbers(reactions[4][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[4]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[4]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 5">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[5][0] + '.png'">
+                                {{formatNumbers(reactions[5][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[5]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[5]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 6">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[6][0] + '.png'">
+                                {{formatNumbers(reactions[6][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[6]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[6]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                        <mat-tab *ngIf="reactions.length > 7">
+                            <ng-template mat-tab-label>
+                                <img class="reactions-stat-img mr-1" [src]="'assets/img/reactions/' + reactions[7][0] + '.png'">
+                                {{formatNumbers(reactions[7][1])}}
+                            </ng-template>
+                            <reaction-item *ngFor="let skeleton of reactionsPlaceholders[7]" [placeholder]="true"></reaction-item>
+                            <reaction-item *ngFor="let reaction of userReactions[7]" [data]="reaction"></reaction-item>
+                        </mat-tab>
+                    </mat-tab-group>    
+                </mat-tab>
+            </mat-tab-group>            
+        </ion-content>
+        <ion-footer *ngIf="mode === 'comments'">
+            <ion-toolbar style="position: relative;">
+                <div *ngIf="answering !== undefined" class="answer">
+                    <span>Répondre {{answering.author.name}}</span>
+                    <button class="btn" (click)="answering = undefined">&times;</button>
+                </div>
+                <form (submit)="onSubmit($event)">
+
+                    <profile-picture class="img-fluid img-sm" class-native="img-circle" [src]="currentUser.picture" [gender]="currentUser.gender"></profile-picture>
+
+                    <div class="img-push">
+                        <input type="text" #input class="form-control form-control-sm" placeholder="Écrivez un commentaire"
+                            fdprocessedid="gqros">
+                    </div>
+                </form>
+            </ion-toolbar>
+        </ion-footer>
+    </ng-template>
+</ion-modal>

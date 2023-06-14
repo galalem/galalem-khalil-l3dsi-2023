@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+
+            <div class="card">
+                <a class="card-body btn d-flex align-items-center" [routerLink]="['create']">
+                    <img class="back-to-school-img" src="assets/img/sprites/undraw_exams.svg" alt="Sitting for exam">
+                    <span class="back-to-school-separator"></span>
+                    <div style="flex: 1;">
+                        <h2 class="back-to-school-text mb-1 mt-2"></h2>
+                        <p class="text-muted">Cliquer ici pour créer une nouvelle session d'évaluation</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-12 pt-4">
+            <data-table [source]="list" [config]="dataTableConfig"/>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12" *ngIf="subject">
+            <div class="card card-light">
+                <div class="card-header">
+                    <h3 class="card-title" style="line-height: 1.5;"><strong>{{evaluation?.label}}</strong>, date limite de remise des notes <strong>{{evaluation?.deadline}}</strong></h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <h1 class="mb-1 mt-0">{{subject.label}}</h1>
+                            <h3 class="m-0 text-secondary font-weight-normal">{{subject.className}}</h3>
+                        </div>
+                        <div class="col-12 mb-1">
+                            <h6 class="text-muted text-sm mb-1 mt-0"><ngx-fa-icon icon="book" class="mr-1"></ngx-fa-icon>
+                                Critères d'évaluation</h6>
+                            <div class="text-lg">
+                                <ion-chip [outline]="true" color="primary" [disabled]="true"
+                                    *ngIf="!subject.criteria?.length">
+                                    <ion-label>[ aucun critère trouvé ]</ion-label>
+                                </ion-chip>
+                                <ion-chip [outline]="true" color="primary" *ngFor="let c of subject.criteria">
+                                    <ion-label>{{c.reference}} | {{c.name}}</ion-label>
+                                </ion-chip>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" *ngIf="subject">
+            <div class="card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Élève</th>
+                            <th *ngFor="let c of subject.criteria"  style="width: 100px; text-align: center;">
+                                {{c.reference}}
+                            </th>
+                            <th style="width: 150px; text-align: center;">Note finale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of list; let i = index">
+                            <tr>
+                                <td>{{i+1}}.</td>
+                                <td>{{item.name}}</td>
+                                <td *ngFor="let sb of item.grade.subGrades"  style="width: 100px; text-align: center; padding: .25rem">
+                                    <input type="number" class="form-control" [title]="sb.criterion.name"
+                                        [(ngModel)]="sb.value" name="nf[]" *ngIf="GRADING_SYSTEM.numeric"
+                                        [min]="GRADING_SYSTEM.range.min" [max]="GRADING_SYSTEM.range.max" [step]="GRADING_SYSTEM.range.step"/>
+
+                                    <select class="form-control" [title]="sb.criterion.name"
+                                        [(ngModel)]="sb.value" name="nf[]" *ngIf="!GRADING_SYSTEM.numeric">
+                                        <option *ngFor="let option of GRADING_SYSTEM.options; let index=index" [value]="index">{{option}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" title="Note finale"
+                                        [(ngModel)]="item.grade.value" name="nf[]" *ngIf="GRADING_SYSTEM.numeric"
+                                        [min]="GRADING_SYSTEM.range.min" [max]="GRADING_SYSTEM.range.max" [step]="GRADING_SYSTEM.range.step"/>
+                                    <select class="form-control" title="Note finale"
+                                        [(ngModel)]="item.grade.value" name="nf[]" *ngIf="!GRADING_SYSTEM.numeric">
+                                        <option *ngFor="let option of GRADING_SYSTEM.options; let index=index" [value]="index">{{option}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-0"></td>
+                                <td [attr.colspan]="subject.criteria?.length + 2" class="border-0 pt-0">
+                                    <input type="text" class="form-control" placeholder="Ajouter un commentaire..." [(ngModel)]="item.grade.comment"/>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+                Soumettre
+            </button>
+        </div>
+    </div>
+</div>

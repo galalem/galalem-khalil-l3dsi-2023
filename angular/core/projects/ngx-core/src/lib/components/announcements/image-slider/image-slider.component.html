@@ -1,0 +1,5 @@
+<ion-slides [pager]="images.length > 1" #slides>
+    <ion-slide *ngFor="let image of images" style="width: 100%;">
+        <image [src]="image"></image>
+    </ion-slide>
+</ion-slides>

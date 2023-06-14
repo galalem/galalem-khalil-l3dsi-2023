@@ -1,0 +1,8 @@
+<h1 mat-dialog-title class="mat-typography">{{data.title}}</h1>
+<div mat-dialog-content>
+  <p [innerHTML]="data.body"></p>
+</div>
+<div mat-dialog-actions>
+  <button class="ml-1 btn btn-sm btn-default" [mat-dialog-close]="false">Annuler</button>
+  <button class="ml-1 btn btn-sm btn-info" [mat-dialog-close]="true">Confirmer</button>
+</div>

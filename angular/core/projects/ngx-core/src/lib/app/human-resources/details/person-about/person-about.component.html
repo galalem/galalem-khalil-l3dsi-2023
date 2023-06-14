@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <profile-picture [src]="entity.photo" [gender]="entity.gender" alt="Photo"
+            style="display: inline-block;width: 100%;text-align: center;"
+            style-native="width: 100%;max-width: 256px;aspect-ratio: 1/1;object-fit: contain;border-radius: 0.25rem;"></profile-picture>
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-6 col-12 px-lg-5 px-md-4 px-sm-3 mt-sm-0 mt-3">
+        <h1 class="mb-1">{{this.entity.localeCivility(true)}} {{entity.firstName}} {{entity.lastName}}
+        </h1>
+        <h3 class="mb-4 text-secondary">#{{entity.code}}</h3>
+        <p class="lead text-justify text-muted text-sm">{{isBlank(entity.about) ? '[ aucune description, remarques ou informations additionnelles ]' : entity.about}}</p>
+    </div>
+</div>

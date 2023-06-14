@@ -1,0 +1,2 @@
+<h6 class="text-muted text-sm mb-1"><ngx-fa-icon [icon]="icon" [type]="iconType" class="mr-1" *ngIf="icon"></ngx-fa-icon> {{title}}</h6>
+<div class="text-lg">{{((isEmpty === undefined && isBlank(text)) || isEmpty) ? (fallback || "[ aucun ]") : text}}</div>

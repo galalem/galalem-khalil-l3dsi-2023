@@ -1,0 +1,74 @@
+ion-menu ion-content, ion-menu ion-toolbar  {
+    --background: #343a40;
+    --color: white
+}
+ion-menu ion-list {
+    background-color: inherit;
+}
+ion-menu ion-item  {
+    margin: 0.25rem 0;
+    --background: #343a40;
+    --color: #c2c7d0;
+    --border-radius: 0.25rem;
+}
+ion-menu ion-item.active  {
+    --background: var(--primary);
+    --color: white;
+}
+ion-menu ion-item ngx-fa-icon[slot="start"] {
+    width: 1.5em;
+    font-size: 1.3rem;
+    margin-right: unset;
+    margin-inline-end: 0.75em;
+    text-align: center;
+}
+
+ion-menu > ion-header > ion-toolbar > ion-buttons > img {
+    width: 1.5em;
+    margin-left: 1em;
+}
+
+ion-menu ion-item.user-menu {
+    --border-radius: 0;
+    --padding-start: 0; 
+    --inner-padding-bottom: 12px;
+    --inner-padding-end: 12px;
+    --inner-padding-start: 12px;
+    --inner-padding-top: 12px;
+}
+
+ion-menu ion-item.menu-toggle{
+    --border-radius: 0.25rem 0.25rem 0 0;
+    margin-bottom: 0;
+}
+ion-menu ion-item.menu-toggle.active{
+    --color: white;
+    --background: rgba(255, 255, 255, 0.1);
+}
+ion-menu mat-expansion-panel {
+    color: white;
+    border-radius: 0 0 0.25rem 0.25rem; 
+    box-shadow: none; 
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-bottom: 0.25rem;
+}
+ion-menu mat-expansion-panel ion-list {
+    padding-bottom: 0;
+}
+ion-menu mat-expansion-panel ion-item {
+    --padding-start: 2.5em;
+}
+ion-menu mat-expansion-panel ion-item:not(.active) {
+    --color: white;
+    --background: transparent;
+}
+
+.user-panel {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), lightgray url(../../assets/img/background-1.png) center center;
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-toolbar .btn {
+      color: #fff;
+    }
+}

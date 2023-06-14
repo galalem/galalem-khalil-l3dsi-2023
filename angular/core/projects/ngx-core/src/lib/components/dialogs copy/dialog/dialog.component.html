@@ -1,0 +1,11 @@
+<dialog #element>
+  <div class="dialog-header">
+    <h4 class="dialog-title"><ng-content select="[dialog-title]"></ng-content></h4>
+  </div>
+  <div class="dialog-body">
+    <ng-content></ng-content>
+  </div>
+  <div class="dialog-footer">
+    <ng-content select="[dialog-actions]"></ng-content>
+  </div>
+</dialog>

@@ -1,0 +1,17 @@
+{
+    "/api/open-meteo": {
+        "target": "https://api.open-meteo.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/open-meteo" : "/"
+        }
+    },
+    "/storage": {
+        "target": "http://localhost:8999",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

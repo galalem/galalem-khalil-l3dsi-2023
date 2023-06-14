@@ -1,0 +1,13 @@
+.table td {
+    vertical-align: middle;
+    border-top: 2px solid #dee2e6;
+}
+.table tbody tr:hover,
+.table tbody tr:nth-of-type(odd):hover + tr,
+.table tbody tr:has(+ tr:nth-of-type(even):hover) {
+    background-color: rgba(0, 29, 88, 0.05);
+}
+
+.form-control {
+    background-color: #fdfdfd;
+}

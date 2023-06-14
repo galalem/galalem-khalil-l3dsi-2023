@@ -1,0 +1,6 @@
+<button class="btn btn-sm mx-1" [matMenuTriggerFor]="dropdown.menu">
+    <ngx-fa-icon icon="ellipsis"></ngx-fa-icon>
+</button>
+<dropdown-menu #dropdown="dropdown" [items]="actions"></dropdown-menu>
+<delete-dialog #deleteDialog *ngIf="!readonly"/>
+<alert-dialog  #alertDialog  *ngIf="!readonly"/>

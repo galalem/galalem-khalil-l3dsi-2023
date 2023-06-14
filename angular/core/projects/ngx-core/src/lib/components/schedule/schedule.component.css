@@ -1,0 +1,66 @@
+table {
+    overflow-x: auto;
+    border-collapse: collapse;
+    --schedule-cell-width: var(--cell-width, 186px);
+    --schedule-cell-height: var(--cell-height, 5rem);
+    --schedule-day-header-width: var(--day-header-width, 100px);
+}
+
+th {
+    padding: 0.5rem 1rem;
+}
+
+td {
+    border: 1px solid #21252922;
+}
+
+tr {
+    position: relative;
+}
+
+table > thead > tr > th:not(:first-child) {
+    min-width: var(--schedule-cell-width);
+}
+
+table > tbody > tr > th:first-child {
+    width: var(--schedule-day-header-width);
+    min-width: var(--schedule-day-header-width);
+    max-width: var(--schedule-day-header-width);
+}
+
+table > tbody > tr {
+    height: var(--schedule-cell-height);
+}
+
+
+.cell {
+    position: absolute;
+    top: 0;
+    left: calc((var(--schedule-cell-width) * var(--left, 0)) + var(--schedule-day-header-width));
+    width: calc(var(--schedule-cell-width) * var(--span, 1));
+    height: var(--schedule-cell-height);
+    border: 1px solid;
+    line-height: 1.1;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.2em;
+    background: var(--background);
+}
+
+.cell.fortnight-a {
+    place-content: start start;
+    text-align: start;
+    background: linear-gradient(to bottom right, var(--background) 50%, transparent 49%);
+    border-bottom: none;
+    border-right: none;
+}
+
+.cell.fortnight-b {
+    place-content: end end;
+    text-align: end;
+    background: linear-gradient(to top left, var(--background) 50%, transparent 50%);
+    border-top: none;
+    border-left: none;
+}

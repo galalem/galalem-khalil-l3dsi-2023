@@ -1,0 +1,7 @@
+td.class-name {
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    text-align: center; 
+    vertical-align: middle;
+    border-right: 1px solid #dee2e6;
+}

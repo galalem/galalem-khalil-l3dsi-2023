@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ngx-starter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/</output-path>
+    <root id="archive" name="ngx-starter.jar">
+      <element id="module-output" name="NGX" />
+    </root>
+  </artifact>
+</component>

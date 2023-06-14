@@ -1,0 +1,53 @@
+.reaction-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 0.75rem 0;
+}  
+
+.reaction-container > .user-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.125rem;
+    position: relative;
+}
+
+.reaction-container > .user-picture > ion-skeleton-text {
+    width: 48px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.reaction-container > .user-picture > img:nth-child(2) {
+    width: 16px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0; right: 0;
+}
+
+.reaction-container > .username {
+    width: 100%;
+    padding: 0 0.5rem;
+    border-radius: 1rem;
+}
+
+
+.reaction-container > .content-block .content-body > .text {
+    margin-top: 0.1rem;
+    line-height: 1.15;
+}
+
+.reaction-container > .content-block .content-footer {
+    padding: 0 0.5rem 0.25rem;
+}
+
+.reaction-container > .content-block .content-footer strong {
+    cursor: pointer;
+}
+
+.reaction-container .dot {
+    display: inline-block;
+    padding: 0 0.35rem;
+}

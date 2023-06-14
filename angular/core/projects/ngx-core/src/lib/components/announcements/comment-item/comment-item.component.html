@@ -1,0 +1,33 @@
+<div class="comment-container" *ngIf="placeholder">
+    <div class="user-picture-block">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </div>
+    <div class="content-block">
+        <div class="content-body">
+            <div><ion-skeleton-text [animated]="true" style="width: 60%; height: 1.5rem;"></ion-skeleton-text></div>
+            <div class="text">
+                <ion-skeleton-text [animated]="true" style="width: 90%;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 90%;"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="comment-container" [class.expanded]="data?.responses?.length" *ngIf="placeholder !== true">
+    <div class="user-picture-block">
+        <profile-picture [src]="data?.author?.picture"
+            style-native="width: 48px; aspect-ratio: 1/1; border-radius: 50%;"></profile-picture>
+    </div>
+    <div class="content-block">
+        <div class="content-body">
+            <div><strong>{{data?.author?.name}}<span class="dot">&#x2022;</span>{{data?.author?.role}}</strong></div>
+            <div class="text">
+                {{data?.content}}
+            </div>
+        </div>
+        <div class="content-footer text-sm text-secondary">
+            {{data?.timestamp}}<span class="dot hide-nested">&#x2022;</span><strong class="hide-nested" (click)="answer.emit(data)">Repondre</strong>
+        </div>
+        <comment-item *ngFor="let response of data?.responses" [data]="response" (answer)="answer.emit($event)"></comment-item>
+    </div>
+</div>

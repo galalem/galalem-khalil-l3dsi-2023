@@ -1,0 +1,25 @@
+<div class="d-flex w-100" style="flex-direction: column; aspect-ratio: 1/1;">
+    <div class="dropzone"
+        [class.file-over]="fileOver"
+        [class.error]="fileError"
+        (dragover)="onDragover($event)"
+        (dragleave)="onDragleave($event)"
+        (drop)="onDrop($event)"
+        (click)="onClick($event)">
+
+        <div class="single-file-container" *ngIf="image">
+            <img [src]="image" alt="img"/>
+            <span class="close" (click)="$event.preventDefault(); $event.stopPropagation(); drop([], true)">&times;</span>
+            <div class="filename">{{value[0].name}}</div>
+        </div>
+
+        <img src="assets/img/ic-upload-file.svg" alt="img" *ngIf="!image"/>
+        <span class="text-sm my-4" *ngIf="!image">Faites glisser et déposez l'image ici ou cliquez pour télécharger</span>
+
+        <input #container type="file" accept="image/*" [multiple]="false" (change)="onChanged($event)"/>
+        <input #temporary type="file" accept="image/*" [multiple]="false" (change)="onSelect($event)"/>
+    </div>
+    <div class="text-danger text-sm" style="height: 1.5rem;">
+        <div>{{error}}</div>
+    </div>
+</div>

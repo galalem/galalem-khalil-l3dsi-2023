@@ -1,0 +1,72 @@
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" (window:resize)="onResize()">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="javascript:;" role="button" (click)="toggleSidebar()"><ngx-fa-icon icon="bars"/></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="https://www.lesnouvellesgenerations.com/" class="nav-link">Acceuil</a>
+        </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item d-flex align-items-stretch mr-1" [hidden]="!usesMode">
+            <ion-segment [(ngModel)]="mode">
+                <ion-segment-button value="Table">
+                    <ngx-fa-icon icon="table" size="lg"></ngx-fa-icon>
+                </ion-segment-button>
+                <ion-segment-button value="Tree">
+                    <ngx-fa-icon icon="sitemap" size="lg"></ngx-fa-icon>
+                </ion-segment-button>
+            </ion-segment>
+        </li>
+        
+        <!-- Context [Department|Period|Year] Dropdown Menu -->
+        <li contextMenu [(context)]="context" class="nav-item mx-1 btn-group" [disabled]="usesContext === null" [hidden]="usesContext === false"></li>
+                
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item d-flex align-items-center mx-1">
+            <a class="btn btn-light" href="javascript:;" [matMenuTriggerFor]="notificationsDropdown.menu">
+                <ngx-fa-icon icon="bell" type="regular"></ngx-fa-icon>
+                <span class="badge badge-warning navbar-badge" *ngIf="notifications > 0">{{notifications}}</span>
+            </a>
+
+            <dropdown-menu #notificationsDropdown="dropdown" [items]="notificationsDropdownItems">
+                <div dropdown-header>
+                    <span class="dropdown-item dropdown-header">{{notifications}} Notifications</span>
+                </div>
+            </dropdown-menu>
+        </li>
+
+        <!-- User Dropdown Menu -->
+        <li class="nav-item d-flex align-items-center mx-1">
+            <a class="btn btn-light d-flex align-items-center" href="javascript:;" [matMenuTriggerFor]="userDropdown.menu">
+                <profile-picture dropdown-toggle [src]="profile.picture" [gender]="profile.gender" class-native="img-circle mr-2"
+                    style-native="height:1.5em; aspect-ratio: 1/1;"></profile-picture>
+                <span class="text-dark" style="font-weight: 500;">{{profile.first_name}}</span>
+                <ngx-fa-icon icon="angle-down" class="ml-2 text-secondary"></ngx-fa-icon>
+            </a>
+            <dropdown-menu #userDropdown="dropdown" [items]="userPanelDropdownItems">
+
+                <div class="user-panel" dropdown-header>
+                    <div class="image">
+                        <profile-picture [src]="profile.picture" [gender]="profile.gender"
+                            class-native="img-circle elevation-2"></profile-picture>
+                    </div>
+                    <div class="info">
+                        <div style="font-weight: 500; font-size: 1.2em;">{{profile.full_name}}</div>
+                        <div style="font-weight: 300;">{{profile.role}}</div>
+                    </div>
+                </div>
+            </dropdown-menu>
+        </li>
+
+        <li class="nav-item d-flex align-items-center mx-1">
+            <a class="btn btn-light" href="javascript:;" (click)="isFullScreen ? closeFullscreen() : openFullscreen()">
+                <ngx-fa-icon [icon]="isFullScreen ? 'compress-arrows-alt' : 'expand-arrows-alt'"></ngx-fa-icon>
+            </a>
+        </li>
+    </ul>
+</nav>

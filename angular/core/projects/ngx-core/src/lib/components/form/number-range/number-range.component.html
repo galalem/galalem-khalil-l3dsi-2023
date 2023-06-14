@@ -1,0 +1,26 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+
+        <input matInput (change)="onMinChanged($event)"
+            type="number" 
+            [attr.max]="max" 
+            [attr.min]="min" 
+            placeholder="min" 
+            [required]="startRequired || required" 
+            [readonly]="startReadonly || readonly" 
+            [disabled]="startDisabled || disabled" style="box-sizing: border-box; width:  calc(50% - 1.2em); padding: 0 0.5em;">
+
+        <span matInput style="text-align: center; display: inline-block; width: 2em;">&ndash;</span>
+
+        <input matInput (change)="onMaxChanged($event)"
+            type="number" 
+            [attr.max]="max" 
+            [attr.min]="min" 
+            placeholder="max" 
+            [required]="endRequired || required" 
+            [readonly]="endReadonly || readonly" 
+            [disabled]="endDisabled || disabled" style="box-sizing: border-box; width:  calc(50% - 1.2em); padding: 0 0.5em;">
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+    </mat-form-field>
+</div>

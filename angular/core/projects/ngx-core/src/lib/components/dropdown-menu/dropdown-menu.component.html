@@ -1,0 +1,33 @@
+<mat-menu #menu="matMenu" [yPosition]="yPosition" [xPosition]="xPosition" class="no-print">
+    <div>
+        <ng-content select="[dropdown-header]"></ng-content>
+    </div>
+
+    <div *ngFor="let item of items">
+        <mat-divider *ngIf="item.divider"></mat-divider>
+        <a mat-menu-item [disabled]="item.disabled" *ngIf="!item.divider && item.routerLink" [routerLink]="item.routerLink" [routerLinkActive]="item.routerLinkActive || ''">
+            <mat-checkbox *ngIf="item.checkbox" (click)="$event.stopPropagation()" (change)="item.checkbox.onChange($event.checked)" [checked]="item.checkbox.checked"></mat-checkbox>
+            <ngx-fa-icon [icon]="item.icon" [type]="item.iconType" *ngIf="item.icon" class="text-{{item.iconTheme || item.theme || 'dark'}} mr-2 text-center" style="display: inline-block; width:1.5em"></ngx-fa-icon>
+            <span class="text-{{item.theme || 'dark'}}">{{item.label}}</span>
+        </a>
+        <a mat-menu-item [disabled]="item.disabled" *ngIf="!item.divider && item.href && !item.routerLink" [href]="item.href" target="{{item.blank ? '_blank' : ''}}">
+            <mat-checkbox *ngIf="item.checkbox" (click)="$event.stopPropagation()" (change)="item.checkbox.onChange($event.checked)" [checked]="item.checkbox.checked"></mat-checkbox>
+            <ngx-fa-icon [icon]="item.icon" [type]="item.iconType" *ngIf="item.icon" class="text-{{item.iconTheme || item.theme || 'dark'}} mr-2 text-center" style="display: inline-block; width:1.5em"></ngx-fa-icon>
+            <span class="text-{{item.theme || 'dark'}}">{{item.label}}</span>
+        </a>
+        <button mat-menu-item [disabled]="item.disabled" *ngIf="!item.divider && !item.href && !item.routerLink && item.onClick != undefined" (click)="item.onClick()">
+            <mat-checkbox *ngIf="item.checkbox" (click)="$event.stopPropagation()" (change)="item.checkbox.onChange($event.checked)" [checked]="item.checkbox.checked"></mat-checkbox>
+            <ngx-fa-icon [icon]="item.icon" [type]="item.iconType" *ngIf="item.icon" class="text-{{item.iconTheme || item.theme || 'dark'}} mr-2 text-center" style="display: inline-block; width:1.5em"></ngx-fa-icon>
+            <span class="text-{{item.theme || 'dark'}}">{{item.label}}</span>
+        </button>
+        <button mat-menu-item [disabled]="item.disabled" *ngIf="!item.divider && !item.href && !item.routerLink && item.onClick == undefined">
+            <mat-checkbox *ngIf="item.checkbox" (click)="$event.stopPropagation()" (change)="item.checkbox.onChange($event.checked)" [checked]="item.checkbox.checked"></mat-checkbox>
+            <ngx-fa-icon [icon]="item.icon" [type]="item.iconType" *ngIf="item.icon" class="text-{{item.iconTheme || item.theme || 'dark'}} mr-2 text-center" style="display: inline-block; width:1.5em"></ngx-fa-icon>
+            <span class="text-{{item.theme || 'dark'}}">{{item.label}}</span>
+        </button>
+    </div>
+
+    <div>
+        <ng-content select="[dropdown-footer]"></ng-content>
+    </div>
+</mat-menu>

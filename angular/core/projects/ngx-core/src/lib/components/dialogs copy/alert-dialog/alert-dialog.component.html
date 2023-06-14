@@ -1,0 +1,12 @@
+<app-dialog #dialog>
+  <ng-container dialog-title>
+    <ng-content select="[dialog-title]"></ng-content>
+    {{data.title}}
+  </ng-container>
+  <ng-content></ng-content>
+  <div [innerHTML]="data.body"></div>
+  <ng-container dialog-actions>
+    <button class="ml-1 btn btn-sm btn-default" (click)="dialog.close()">Annuler</button>
+    <button class="ml-1 btn btn-sm btn-info" (click)="data.handler(); confirm.emit(); dialog.close()">Confirmer</button>
+  </ng-container>
+</app-dialog>

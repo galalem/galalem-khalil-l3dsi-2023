@@ -1,0 +1,196 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-alert #alert></app-alert>
+      </div>
+      <div class="col-12">
+        <form #formCtrl="ngForm">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                <image-dropzone [(ngxModel)]="photo" [preload]="entity.photo"></image-dropzone>
+              </div>
+              <div class="col-xl-9 col-lg-8 col-sm-6 col-12">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.firstName" name="firstName" [required]="true"
+                      label="Prénom">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.lastName" name="lastName" [required]="true"
+                      label="Nom">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.code" name="code" [required]="true"
+                      placeholder="Code Référence"
+                      label="Code"
+                      [counter]="true"
+                      [maxlength]="11"
+                      [disabled]="editMode">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.username" name="username" [required]="true"
+                      label="Nom d'utilisateur"
+                      pattern="[0-9a-z_]+"
+                      [disabled]="editMode">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <select-input [(ngModel)]="entity.gender" name="gender" [required]="true"
+                      label="Sexe"
+                      [options]="GENDER_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <select-input [(ngModel)]="entity.civility" name="civility"
+                      label="Civilité"
+                      [options]="CIVILITY_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-12">
+                    <text-area [(ngModel)]="entity.about" name="about"
+                      label="À Propos"
+                      placeholder="Entrer une description, des remarques ou des informations additionnelles ici..."
+                      [rows]="5">
+                    </text-area>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <mat-tab-group>
+              <mat-tab label="Identité"> 
+              <div class="container mt-4">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <date-input [(ngModel)]="entity.dateOfBirth" name="dateOfBirth" [required]="true"
+                      label="Date de naissance">
+                    </date-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.placeOfBirth" name="placeOfBirth" [required]="true"
+                      label="Lieu de naissance">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-12">
+                    <select-input [(ngModel)]="entity.nationality" name="nationality" [required]="true"
+                      label="Nationalité"
+                      [options]="NATIONALITY_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <select-input [(ngModel)]="entity.idType" name="idType"
+                      label="Pièce d'Identité"
+                      [options]="IDTYPE_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.idNumber" name="idNumber"
+                      label="Numéro">
+                    </text-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <date-input [(ngModel)]="entity.idDateOfIssue" name="idDateOfIssue"
+                      label="Date de Délivrance">
+                    </date-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.idPlaceOfIssue" name="idPlaceOfIssue"
+                      label="Lieu de Délivrance">
+                    </text-input>
+                  </div>
+                </div>
+              </div>
+              </mat-tab>
+              <mat-tab label="Contact"> 
+                <div class="container mt-4">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input type="email" [(ngModel)]="entity.email" name="email" [required]="true"
+                        label="Adresse E-mail">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input type="phone" [(ngModel)]="entity.phone" name="phone"
+                        label="Numéro de Téléphone">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input type="phone" [(ngModel)]="entity.phone2" name="phone2"
+                        label="Numéro de Téléphone Alternatif">
+                      </text-input>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <mat-button-toggle-group [(ngModel)]="entity.useParentAddress" name="useParentAddress" class="w-100">
+                            <mat-button-toggle [value]="false" class="w-50">Coordonnées Personalisées</mat-button-toggle>
+                            <mat-button-toggle [value]="true" class="w-50">Héritées de Parent</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="col-xl-9 col-lg-8 col-12">
+                      <text-input [(ngModel)]="entity.address.street" name="address_street" [required]="!entity.useParentAddress"
+                        label="Adresse" [disabled]="entity.useParentAddress">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-12">
+                      <text-input [(ngModel)]="entity.address.code" name="address_code" [required]="!entity.useParentAddress"
+                        label="Code Postale" [disabled]="entity.useParentAddress">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input [(ngModel)]="entity.address.city" name="address_city" [required]="!entity.useParentAddress"
+                        label="Ville" [disabled]="entity.useParentAddress">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input [(ngModel)]="entity.address.state" name="address_state" [required]="!entity.useParentAddress"
+                        label="État/Province" [disabled]="entity.useParentAddress">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                      <text-input [(ngModel)]="entity.address.country" name="address_country" [required]="!entity.useParentAddress"
+                        label="Pays" [disabled]="entity.useParentAddress">
+                      </text-input>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Famille">
+                <div class="container mt-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <select-input [(ngModel)]="entity.mainParent" name="mainParent" [required]="true"
+                        label="Parent Principal"
+                        [options]="MAIN_PARENT_OPTIONS">
+                      </select-input>
+                    </div>
+                    <div class="col-12">
+                      <dialog-input label="Père" [display]="entity.father?.name() || ''" (requestDialog)="showParentsDialog(MainParent.FATHER)">
+                      </dialog-input>
+                    </div>
+                    <div class="col-12">
+                      <dialog-input label="Mère" [display]="entity.mother?.name() || ''" (requestDialog)="showParentsDialog(MainParent.MOTHER)">
+                      </dialog-input>
+                    </div>
+                    <div class="col-12">
+                      <dialog-input label="Tuteur" [display]="entity.tutor?.name() || ''" (requestDialog)="showParentsDialog(MainParent.MOTHER)">
+                      </dialog-input>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+  
+            <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+              Soumettre
+            </button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>    
+      

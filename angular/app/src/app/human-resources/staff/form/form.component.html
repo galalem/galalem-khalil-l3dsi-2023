@@ -1,0 +1,199 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-alert #alert></app-alert>
+      </div>
+      <div class="col-12">
+        <form #formCtrl="ngForm">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                <image-dropzone [(ngxModel)]="photo" [preload]="entity.photo"></image-dropzone>
+              </div>
+              <div class="col-xl-9 col-lg-8 col-sm-6 col-12">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.firstName" name="firstName" ngModel [required]="true"
+                      label="Prénom">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.lastName" name="lastName" ngModel [required]="true"
+                      label="Nom">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.code" name="code" ngModel [required]="true"
+                      placeholder="Code Référence"
+                      label="Code"
+                      [counter]="true"
+                      [maxlength]="11"
+                      [disabled]="editMode">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.username" name="username" ngModel [required]="true"
+                      label="Nom d'utilisateur"
+                      pattern="[0-9a-z_]+"
+                      [disabled]="editMode">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <select-input [(ngModel)]="entity.gender" name="gender" ngModel [required]="true"
+                      label="Sexe"
+                      [options]="GENDER_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <select-input [(ngModel)]="entity.civility" name="civility" ngModel [required]="true"
+                      label="Civilité"
+                      [options]="CIVILITY_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-12">
+                    <text-area [(ngModel)]="entity.about"
+                      label="À Propos"
+                      placeholder="Entrer une description, des remarques ou des informations additionnelles ici..."
+                      [rows]="5">
+                    </text-area>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <mat-tab-group>
+              <mat-tab label="Identité"> 
+              <div class="container mt-4">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <date-input [(ngModel)]="entity.dateOfBirth" name="dateOfBirth" ngModel [required]="true"
+                      label="Date de naissance">
+                    </date-input>
+                  </div>
+                  <div class="col-xl-4 col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.placeOfBirth" name="placeOfBirth" ngModel [required]="true"
+                      label="Lieu de naissance">
+                    </text-input>
+                  </div>
+                  <div class="col-xl-4 col-12">
+                    <select-input [(ngModel)]="entity.nationality" name="nationality" ngModel [required]="true"
+                      label="Nationalité"
+                      [options]="NATIONALITY_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <select-input [(ngModel)]="entity.idType" name="idType" ngModel [required]="true"
+                      label="Pièce d'Identité"
+                      [options]="IDTYPE_OPTIONS">
+                    </select-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.idNumber" name="idNumber" ngModel [required]="true"
+                      label="Numéro">
+                    </text-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <date-input [(ngModel)]="entity.idDateOfIssue" name="idDateOfIssue" ngModel [required]="true"
+                      label="Date de Délivrance">
+                    </date-input>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <text-input [(ngModel)]="entity.idPlaceOfIssue" name="idPlaceOfIssue" ngModel [required]="true"
+                      label="Lieu de Délivrance">
+                    </text-input>
+                  </div>
+                </div>
+              </div>
+              </mat-tab>
+              <mat-tab label="Contact"> 
+                <div class="container mt-4">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input type="email" [(ngModel)]="entity.email" name="email" ngModel [required]="true"
+                        label="Adresse E-mail">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input type="phone" [(ngModel)]="entity.phone" name="phone" ngModel [required]="true"
+                        label="Numéro de Téléphone">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input type="phone" [(ngModel)]="entity.phone2"
+                        label="Numéro de Téléphone Alternatif">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-9 col-lg-8 col-12">
+                      <text-input [(ngModel)]="entity.address.street" name="address_street" ngModel [required]="true"
+                        label="Adresse">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-12">
+                      <text-input [(ngModel)]="entity.address.code" name="address_code" ngModel [required]="true"
+                        label="Code Postale">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input [(ngModel)]="entity.address.city" name="address_city" ngModel [required]="true"
+                        label="Ville">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <text-input [(ngModel)]="entity.address.state" name="address_state" ngModel [required]="true"
+                        label="État/Province">
+                      </text-input>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                      <text-input [(ngModel)]="entity.address.country" name="address_country" ngModel [required]="true"
+                        label="Pays">
+                      </text-input>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Informations Professionelles">
+                <div class="container mt-4">
+                  <div class="row">
+                    <div class="col-lg-6 col-12">
+                      <date-input [(ngModel)]="entity.dateOfRecruitment"
+                      label="Date de Recrutement">
+                      </date-input>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                      <select-input [(ngModel)]="entity.typeOfContract"
+                        label="Type de Contrat"
+                        [options]="CONTRACT_OPTIONS">
+                      </select-input>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                      <text-input [(ngModel)]="entity.function" name="function" ngModel [required]="true"
+                        label="Fonction">
+                      </text-input>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                      <select-input [(ngModel)]="entity.role" name="role" ngModel [required]="true"
+                        label="Role"
+                        [options]="ROLE_OPTIONS">
+                      </select-input>
+                    </div>
+                    <div class="col-12">
+                      <text-input type="email" [(ngModel)]="entity.mailer"
+                        label="Email Professionnel" placeholder="example@ngx.com">
+                      </text-input>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+  
+            <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+              Soumettre
+            </button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>    
+      

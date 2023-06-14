@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-md-12">
+
+            <div class="card">
+                <a class="card-body btn d-flex align-items-center" [routerLink]="['/administration/school-year/create']">
+                    <img class="back-to-school-img" src="assets/img/sprites/undraw_back_to_school.svg" alt="Back To School">
+                    <span class="back-to-school-separator"></span>
+                    <div style="flex: 1;">
+                        <h2 class="back-to-school-text mb-1 mt-2"></h2>
+                        <p class="text-muted">Cliquer ici pour créer une nouvelle année scolaire</p>
+                    </div>
+                </a>
+            </div>
+
+            <h2 class="my-5">Historique</h2>
+
+            <div class="timeline">
+
+            <ng-container *ngFor="let year of data">
+                <div class="time-label">
+                    <span class="bg-purple font-weight-normal px-2">&nbsp;{{year.year}}&nbsp;</span>
+                </div>
+
+
+                <div *ngFor="let department of departments">
+                    <i class="fas bg-indigo"><ngx-fa-icon icon="circle" size="xs" style="vertical-align: middle;"></ngx-fa-icon></i>
+                    <div class="timeline-item">
+                        <span class="time" *ngIf="year.departments[department.id]">
+                            <button class="btn btn-warning btn-xs"><ngx-fa-icon icon="pen-to-square"/></button>
+                            &nbsp;
+                            <button class="btn btn-danger btn-xs"><ngx-fa-icon icon="trash"/></button>
+                        </span>
+                        <h3 class="timeline-header">
+                            <a href="#" class="text-navy">{{department.name}}</a> &#x2022;
+                            <span *ngIf="year.departments[department.id]?.length == 3">Régime Trimestriel</span>
+                            <span *ngIf="year.departments[department.id]?.length == 2">Régime Semestriel</span>
+                            <span *ngIf="year.departments[department.id]?.length != 3 && year.departments[department.id]?.length != 2 && year.departments[department.id]">Régime Personalisé</span>
+                            <i *ngIf="!year.departments[department.id]">Exclu</i>
+                        </h3>
+                        <div class="timeline-body" *ngIf="year.departments[department.id]">
+                            <div class="timeline mt-1 mb-0">
+
+                                <div *ngFor="let period of year.departments[department.id]; let index=index">
+                                    <i class="fas bg-secondary" style="width: 16px; height: 16px; line-height: 16px; left: 25px; top: 7px;"></i>
+                                    <div class="timeline-item">
+                                        <span class="time">{{formatDate(period.startsAt)}}-{{formatDate(period.endsAt)}}</span>
+                                        <h3 class="timeline-header">
+                                            <span *ngIf="year.departments[department.id].length == 3">Trimestre</span>
+                                            <span *ngIf="year.departments[department.id].length == 2">Semestre</span>
+                                            <span *ngIf="year.departments[department.id].length != 3 && year.departments[department.id].length != 2">Période</span>
+                                            N°{{index + 1}}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+                <div>
+                    <i class="fas bg-gray"><ngx-fa-icon icon="square" size="xs" style="vertical-align: middle;"></ngx-fa-icon></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

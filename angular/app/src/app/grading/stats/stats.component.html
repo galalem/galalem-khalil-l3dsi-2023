@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+          <div class="info-box bg-{{percent < 25 ? 'danger' : (percent < 50 ? 'warning' : (percent < 75 ? 'success' : 'info'))}}">
+            <span class="info-box-icon"><ngx-fa-icon icon="ranking-star"/></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Notes remises</span>
+              <span class="info-box-number">{{percent}}%</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: {{percent}}%"></div>
+              </div>
+              <span class="progress-description">
+              {{grades}} sur {{total}} notes sont remises
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12">
+            <data-table [source]="list" [config]="dataTableConfig"/>
+        </div>
+    </div>
+</div>

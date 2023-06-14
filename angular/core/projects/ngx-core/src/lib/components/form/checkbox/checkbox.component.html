@@ -1,0 +1,14 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [readonly]="true" [value]="display">
+        <span matTextPrefix>        
+            <mat-checkbox (change)="onChanged($event)"
+                [checked]="value === true"
+                [indeterminate]="value === undefined && indeterminate" [disabled]="disabled">
+            </mat-checkbox> 
+        </span>
+
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+    </mat-form-field>
+</div>

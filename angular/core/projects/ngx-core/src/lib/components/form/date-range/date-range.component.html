@@ -1,0 +1,13 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [disabled]="disabled">
+            <input matStartDate formControlName="start" [placeholder]="startPlaceholder || 'jj/mm/aaaa'" [required]="startRequired || required" [readonly]="startReadonly || readonly" [disabled]="startDisabled || disabled" (dateChange)="writeValue({start: $event.value, end: null})">
+            <input matEndDate formControlName="end" [placeholder]="endPlaceholder || 'jj/mm/aaaa'" [required]="endRequired || required" [readonly]="endReadonly || readonly" [disabled]="endDisabled || disabled" (dateChange)="writeValue({start: value.start, end: $event.value})">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+    </mat-form-field>
+</div>

@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <div class="card card-light">
+                <div class="card-header">                    
+                    <h3 class="card-title" style="line-height: 1.5;">Détails</h3>
+                    <div class="card-tools" *ngIf="canEdit">
+                        <a type="button" class="btn btn-sm btn-warning mx-1" [routerLink]="['/administration/establishment/edit' ]">
+                          <ngx-fa-icon icon="pen-to-square" class="mr-1"></ngx-fa-icon> Modifier
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <image [src]="entity.logo" alt="Photo" 
+                            style="display: inline-block;width: 100%;text-align: center;"
+                            style-native="width: 100%;max-width: 256px;aspect-ratio: 1/1;object-fit: contain;border-radius: 0.25rem;"></image>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-6 col-12 px-lg-5 px-md-4 px-sm-3 mt-sm-0 mt-3">
+                            <h1 class="mb-1">{{entity.name}}</h1>
+                            <h3 class="mb-4 text-secondary">{{entity.acronym}}</h3>
+                            <p class="lead text-justify text-muted text-sm">{{isBlank(entity.about) ? '[ aucune description, remarques ou informations additionnelles ]' : entity.about}}</p>
+                        </div>
+                        <div class="col-lg-9 offset-lg-3 col-12 px-lg-5 px-md-4 px-sm-3 mt-3">
+                            <h2 class="mb-1">Contact</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-12">
+                                    <simple-text-details title="E-mail" [icon]="EmailIcon" [text]="entity.email"></simple-text-details>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <simple-text-details title="Téléphone" [icon]="PhoneIcon" [text]="entity.phone"></simple-text-details>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    {{log(entity.phone2)}}
+                                    <simple-text-details title="Téléphone Alternatif" [icon]="PhoneIcon" [text]="entity.phone2"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Adresse" [icon]="AddressIcon" [text]="entity.address.toString()" [empty]="entity.address.isEmpty()"></simple-text-details>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Dernière mise à jour {{entity.updatedAt}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

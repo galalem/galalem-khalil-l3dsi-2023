@@ -1,0 +1,64 @@
+<ion-content>
+    <div class="p-2">
+        <app-alert #alert></app-alert>
+        <div class="card card-light" *ngIf="entity.id">
+            <div class="card-header">                    
+                <h3 class="card-title" style="line-height: 1.5;">Détails</h3>
+                <div class="card-tools">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row px-lg-4 px-md-3 px-sm-2">
+                    <div class="col-12 mb-3">
+                        <h1 class="mb-1">{{entity.label}}</h1>
+                        <h3 class="m-0 text-secondary font-weight-normal">{{entity.class?.name}}</h3>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <h6 class="text-muted text-sm mb-1"><ngx-fa-icon icon="user-tie" class="mr-1"></ngx-fa-icon> Enseignant</h6>
+                        <div class="text-lg">{{entity.teacher?.localeCivility(true)}} {{entity.teacher?.name()}}</div>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <h6 class="text-muted text-sm mb-1"><ngx-fa-icon icon="palette" class="mr-1"></ngx-fa-icon> Couleur</h6>
+                        <div class="text-lg">
+                            <button class="btn btn-lg btn-block" [style]="'background-color: '+entity.color+'; color: '+entity.textColor">{{entity.color}}</button>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <h6 class="text-muted text-sm mb-1"><ngx-fa-icon icon="ranking-star" class="mr-1"></ngx-fa-icon> Système de notation</h6>
+                        <div class="text-lg">
+                            <ion-chip [outline]="true" color="primary">
+                                <ion-label>{{entity.grading?.label ?? '[ aucun system choisi ]'}}</ion-label>
+                            </ion-chip>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <h6 class="text-muted text-sm mb-1"><ngx-fa-icon icon="book" class="mr-1"></ngx-fa-icon> Critères d'évaluation</h6>
+                        <div class="text-lg">
+                            <ion-chip [outline]="true" color="primary" *ngIf="!entity.criteria?.length">
+                                <ion-label>[ aucun critère trouvé ]</ion-label>
+                            </ion-chip>
+                            <ion-chip [outline]="true" color="primary" *ngFor="let c of entity.criteria">
+                                <ion-label>{{c.reference}} | {{c.name}}</ion-label>
+                            </ion-chip>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <h6 class="text-muted text-sm mb-1"><ngx-fa-icon icon="calendar-days" class="mr-1"></ngx-fa-icon> Séances</h6>
+                        <div class="text-lg">
+                            <ion-chip [outline]="true" color="primary" *ngIf="!entity.sessions?.length">
+                                <ion-label>[ aucune séance trouvée ]</ion-label>
+                            </ion-chip>
+                            <ion-chip color="dark" style="opacity: 1;" [disabled]="true" *ngFor="let session of entity.sessions">
+                                <ion-label>{{session.day}} {{session.start}} - {{session.end}} @ {{session.place}} {{session.fortnight !== null ? ' | '+ (session.fortnight ? 'SI' : 'SP') : ''}} {{session.group !== null ? ' [ G' + session.group + ' ]' : ''}}</ion-label>
+                            </ion-chip>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <h6 class="text-muted text-sm mb-1"><ngx-fa-icon icon="user-group" class="mr-1"></ngx-fa-icon> Étudiée par</h6>
+                        <div class="text-lg">{{entity.shared ? 'Toute la classe' : entity.students?.length + ' Élèves spécifiques'}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,27 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Fruit selection">
+            <mat-chip-row *ngFor="let item of value" (removed)="remove(item)">
+                {{item.label}}
+                <button matChipRemove [attr.aria-label]="'remove ' + item.label">
+                    <ngx-fa-icon icon="circle-xmark"></ngx-fa-icon>
+                </button>
+            </mat-chip-row>
+            <input placeholder="New Fruit..." #multipleSelectInput [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="entered($event)" />
+        </mat-chip-grid>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let opt of options" [value]="opt.value" [disabled]="opt.disabled">
+                {{opt.label}}
+            </mat-option>
+        </mat-autocomplete>
+
+        <span matTextPrefix *ngIf="textPrefix">{{textPrefix}}</span>
+        <span matTextSuffix *ngIf="textSuffix">{{textSuffix}}</span>
+
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+        <mat-error *ngIf="error" class="text-sm">{{error}}</mat-error>
+    </mat-form-field>
+</div>

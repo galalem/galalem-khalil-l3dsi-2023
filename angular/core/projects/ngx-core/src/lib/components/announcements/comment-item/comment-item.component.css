@@ -1,0 +1,72 @@
+.comment-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    margin: 0.75rem 0;
+}  
+
+.comment-container > .user-picture-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.125rem;
+}
+
+.comment-container.expanded > .user-picture-block::after {
+    content: "";
+    display: block;
+    width: 0.2rem;
+    height: 100%;
+    margin: 0.5rem;
+    background-color: #efefef;
+    border-radius: 100vmax;
+}
+
+.comment-container > .user-picture-block > ion-skeleton-text {
+    width: 48px; 
+    aspect-ratio: 1/1; 
+    border-radius: 50%;
+}
+
+.comment-container > .content-block {
+    width: 100%;
+    padding: 0 0.5rem;
+    border-radius: 1rem;
+}
+
+.comment-container > .content-block .content-body {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #282828;
+    background-color: #efefef;
+    border-radius: 1rem;
+    padding: 0.5rem 0.75rem;
+}
+.comment-container > .content-block .content-body:has(ion-skeleton-text) {
+    width: 100%;
+}
+
+
+.comment-container > .content-block .content-body > .text {
+    margin-top: 0.1rem;
+    line-height: 1.15;
+}
+
+.comment-container > .content-block .content-footer {
+    padding: 0 0.5rem 0.25rem;
+}
+
+.comment-container > .content-block .content-footer strong {
+    cursor: pointer;
+}
+
+.comment-container .dot {
+    display: inline-block;
+    padding: 0 0.35rem;
+}
+
+comment-item comment-item .hide-nested {
+    display: none;
+}
+

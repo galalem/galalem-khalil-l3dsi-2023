@@ -1,0 +1,110 @@
+.reactions {
+    z-index: 100;
+    height: 3rem;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0 0.25rem;
+    border-radius: 50vmax;
+    background-color: white;
+    box-shadow: 0 0.125rem 1rem 0.125rem  rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 50%;
+    bottom: 99%;
+    transform: translateX(-25%);
+    transition: all 350ms ease-in-out;
+}
+
+.react-btn {
+    position: relative;
+    padding: 0;
+    margin: 0 0.25rem;
+    transition: all 100ms ease-in-out;
+}
+.react-btn:hover, .react-btn.active {
+    background-color: transparent;
+    border-color: transparent;
+    scale: 1.2;
+}
+
+.react-btn::before {
+    content: attr(title);
+    display: none;
+    white-space: nowrap;
+    font-size: 0.76rem;
+    padding: 0 0.5em;
+    border-radius: 50vmax;
+    color: white;
+    background-color: #202020;
+    opacity: 0.9;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.reactions.visible > .react-btn:hover::before, 
+.reactions.visible > .react-btn.active::before {
+    display: inline-block;
+}
+
+.react-btn > img {
+    width: 2rem;
+    aspect-ratio: 1/1;
+    transition: all 300ms ease-in-out;
+}
+
+
+.react-btn:nth-child(1) > img {
+    transition-duration: 50ms;
+}
+.react-btn:nth-child(2) > img {
+    transition-duration: 100ms;
+}
+.react-btn:nth-child(3) > img {
+    transition-duration: 150ms;
+}
+.react-btn:nth-child(4) > img {
+    transition-duration: 200ms;
+}
+.react-btn:nth-child(5) > img {
+    transition-duration: 250ms;
+}
+.react-btn:nth-child(6) > img {
+    transition-duration: 300ms;
+}
+.react-btn:nth-child(7) > img {
+    transition-duration: 350ms;
+}
+
+.reactions:not(.visible) {
+    height: 0px;
+    padding: 0px;
+    box-shadow: none;
+}
+
+.reactions:not(.visible) > .react-btn {
+    border: none;
+    margin: 0px;
+}
+.reactions:not(.visible) > .react-btn > img {
+    width: 0px;
+}
+
+.reactions-stat-img {
+    position: relative;
+    width: 1.25rem;
+    aspect-ratio: 1/1;
+    margin-left: -0.3rem;
+    border: 0.125rem solid white;
+    border-radius: 50%;
+}
+
+.expand-toggle {
+    color: var(--secondary);
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}

@@ -1,0 +1,14 @@
+package com.ngx.rh.responses.browse;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class StudentResponse extends PersonResponse {
+    public StudentResponse(PersonResponse response) {
+        super(response);
+    }
+}

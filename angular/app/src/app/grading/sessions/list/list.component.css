@@ -1,0 +1,107 @@
+.time > button.btn {
+    font-size: 12px;
+    padding: 3px 7px;
+    margin-block: -3px;
+}
+
+.back-to-school-img {
+    width: 30%;
+    max-width: 250px;
+}
+
+.back-to-school-separator {
+    width: 0;
+    align-self: stretch;
+    border: 1px solid #dee2e6;
+    border-radius: 1px;
+    margin-inline: 2rem;
+}
+
+.back-to-school-text {
+    font-family: 'Comic Sans MS';
+    font-size: 5vw;
+    font-weight: bold;
+    flex: 1;
+    line-height: 1;
+    margin: 0;
+}
+.back-to-school-text::before {
+    content: "";
+    animation: type 2500ms linear 0ms infinite forwards alternate;
+}
+.back-to-school-text::after {
+    content: "|";
+    animation: blink 500ms linear infinite forwards;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    color: #343a40;
+}
+
+@keyframes type {
+    0%,22% {
+      content: "";
+    }
+    24% {
+      content: "S";
+    }
+    27% {
+      content: "Se";
+    }
+    28% {
+      content: "Ses";
+    }
+    31% {
+      content: "Sess";
+    }
+    34% {
+      content: "Sessi";
+    }
+    37% {
+      content: "Sessio";
+    }
+    40% {
+      content: "Session";
+    }
+    50% {
+      content: "Session d";
+    }
+    53% {
+      content: "Session d'";
+    }
+    56% {
+      content: "Session d'É";
+    }
+    58% {
+      content: "Session d'Év";
+    }
+    61% {
+      content: "Session d'Éal";
+    }
+    63% {
+      content: "Session d'Évalu";
+    }
+    66% {
+      content: "Session d'Évalua";
+    }
+    69%{
+      content: "Session d'Évaluat";
+    }
+    71%{
+      content: "Session d'Évaluati";
+    }
+    73%{
+      content: "Session d'Évaluatio";
+    }
+    75%, 100% {
+      content: "Session d'Évaluation";
+    }
+}
+
+@keyframes blink {
+    0%,29%,71%,100% {
+        opacity: 0;
+    }
+    30%, 70% {
+        opacity: 1;
+    }
+}

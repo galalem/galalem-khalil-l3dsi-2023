@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+      - id: keycloak
+        uri: http://localhost:8080
+        predicates:
+        - Path=/keycloak/**
+        filters:
+        - RewritePath=/keycloak/(?<segment>.*),/realms/ngx/$\{segment}
+      - id: storage
+        uri: lb://storage
+        predicates:
+        - Path=/storage/**
+        filters:
+        - RewritePath=/storage/(?<segment>.*),/storage/$\{segment}
+      - id: human-resources
+        uri: lb://human-resources
+        predicates:
+        - Path=/api/human-resources/**
+        filters:
+        - RewritePath=/api/human-resources/(?<segment>.*),/api/$\{segment}
+      - id: administration
+        uri: lb://administration
+        predicates:
+        - Path=/api/administration/**
+        filters:
+        - RewritePath=/api/administration/(?<segment>.*),/api/$\{segment}
+      - id: news
+        uri: lb://news
+        predicates:
+        - Path=/api/news/**
+        filters:
+        - RewritePath=/api/news/(?<segment>.*),/api/$\{segment}
+      - id: news
+        uri: lb://schooling
+        predicates:
+          - Path=/api/schooling/**
+        filters:
+          - RewritePath=/api/schooling/(?<segment>.*),/api/$\{segment}
+
+server:
+  port: 8100
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

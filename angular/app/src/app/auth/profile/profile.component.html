@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5 col-12 px-lg-5 px-md-3 px-1">
+                            <profile-picture style="display: block;" class="w-100 h-100" style-native="height:100%" class-native="profile-image" [src]="profile.picture" [gender]="profile.gender" alt="Picture"></profile-picture>
+                        </div>
+                        <div class="col-lg-8 col-md-7 col-12">
+                            <div class="row mx-lg-5 mx-md-4 mx-1">
+                                <div class="col-6 mb-3">
+                                    <div class="profile-info">Prénom</div>
+                                    <div class="profile-data">{{profile.first_name}}</div>
+                                </div>
+                                <div class="col-6 mb3">
+                                    <div class="profile-info">Nom</div>
+                                    <div class="profile-data">{{profile.last_name}}</div>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-3">
+                                    <div class="profile-info">Nom d'utilisateur</div>
+                                    <div class="profile-data">{{profile.username}}</div>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-3">
+                                    <div class="profile-info">Rôle</div>
+                                    <div class="profile-data">{{profile.role}}</div>
+                                </div>
+                                <div class="col-12 mb-3 mt-3">
+                                    <div class="profile-info">E-mail</div>
+                                    <div class="profile-data">{{profile.email}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

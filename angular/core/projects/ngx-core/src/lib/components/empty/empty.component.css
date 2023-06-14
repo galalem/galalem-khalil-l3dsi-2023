@@ -1,0 +1,12 @@
+.empty-container {
+    text-align: center;
+}
+
+.empty-image {
+    max-width: 300px;
+    width: 50%;
+}
+
+.empty-text {
+    color: #343A40;
+}

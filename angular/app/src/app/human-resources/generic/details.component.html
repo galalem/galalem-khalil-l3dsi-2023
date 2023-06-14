@@ -1,0 +1,120 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <div class="card card-light">
+                <div class="card-header">
+                    <h3 class="card-title" style="line-height: 1.5;">Détails</h3>
+                    <div class="card-tools no-print">
+                        <a type="button" class="btn btn-sm btn-warning mx-1" [routerLink]="editLink">
+                            <ngx-fa-icon [icon]="EditIcon" class="mr-1"></ngx-fa-icon> Modifier
+                        </a>
+                        <button type="button" class="btn btn-sm btn-danger mx-1" (click)="showDeleteDialog()">
+                            <ngx-fa-icon [icon]="DeleteIcon" class="mr-1"></ngx-fa-icon> Supprimer
+                        </button>
+                        <person-menu [person]="entity" [readonly]="false" [profile]="'/human-resources/' + ref"></person-menu>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <person-about [person]="entity"></person-about>
+                    <person-identity [person]="entity"></person-identity>
+                    <person-contact [person]="entity"></person-contact>
+                    <div class="row">
+<!--
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <profile-picture [src]="entity.photo" [gender]="entity.gender" alt="Photo" 
+                                style="display: inline-block;width: 100%;text-align: center;"
+                                style-native="width: 100%;max-width: 256px;aspect-ratio: 1/1;object-fit: contain;border-radius: 0.25rem;"></profile-picture>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-6 col-12 px-lg-5 px-md-4 px-sm-3 mt-sm-0 mt-3">
+                            <h1 class="mb-1">{{this.entity.localeCivility(true)}} {{entity.firstName}} {{entity.lastName}}
+                            </h1>
+                            <h3 class="mb-4 text-secondary">#{{entity.code}}</h3>
+                            <p class="lead text-justify text-muted text-sm">{{isBlank(entity.about) ? '[ aucune description, remarques ou informations additionnelles ]' : entity.about}}</p>
+                        </div>
+
+                        <div class="col-lg-9 offset-lg-3 col-12 px-lg-5 px-md-4 px-sm-3 mt-3">
+                            <h2 class="mb-1">Identité</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-3">
+                                    <h6 class="text-muted text-sm mb-1">Sexe</h6>
+                                    <div class="text-lg"><ngx-fa-icon class="mr-1" [icon]="entity.gender == FEMALE ? 'venus' : 'mars'"></ngx-fa-icon> {{entity.localeGender()}}</div>
+                                </div>
+                                <div class="col-5">
+                                    <simple-text-details title="Prénom" [text]="entity.firstName"></simple-text-details>
+                                </div>
+                                <div class="col-4">
+                                    <simple-text-details title="Nom" [text]="entity.lastName"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Date et Lieu de naissance"
+                                        [text]="'le ' + entity.dateOfBirth + ' à ' + entity.placeOfBirth"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Nationalité" icon="earth"
+                                        [text]="entity.nationality"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Pièce d'Identité" icon="id-card"
+                                        [text]="entity.localeIdType() + ' No. ' + entity.idNumber + ' délivrée le ' + entity.idDateOfIssue + ' à ' + entity.idPlaceOfIssue">
+                                    </simple-text-details>
+                                </div>
+                            </div>
+-->
+                        <div class="col-lg-9 offset-lg-3 col-12 px-lg-5 px-md-4 px-sm-3 mt-3">
+                            <template *ngFor="let block of before">
+                            <h2 class="mb-1 mt-5">{{block.title}}</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div *ngFor="let detail of block.details" [class]="detail.class">
+                                    <simple-text-details [title]="detail.title" [icon]="detail.icon"
+                                        [text]="detail.text" [empty]="detail.empty"></simple-text-details>
+                                </div>
+                            </div>
+                            </template>
+<!--
+                            <h2 class="mb-1 mt-5">Contact</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-12">
+                                    <simple-text-details title="E-mail" icon="envelope"
+                                        [text]="entity.email"></simple-text-details>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <simple-text-details title="Téléphone" icon="phone"
+                                        [text]="entity.phone"></simple-text-details>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <simple-text-details title="Téléphone Alternatif" icon="phone"
+                                        [text]="entity.phone2"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Adresse" icon="map-location-dot"
+                                        [text]="entity.address.toString()"
+                                        [empty]="entity.address.isEmpty()"></simple-text-details>
+                                </div>
+                            </div>
+-->
+                            <template *ngFor="let block of after">
+                            <h2 class="mb-1 mt-5">{{block.title}}</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div *ngFor="let detail of block.details" [class]="detail.class">
+                                    <simple-text-details [title]="detail.title" [icon]="detail.icon"
+                                        [text]="detail.text" [empty]="detail.empty"></simple-text-details>
+                                </div>
+                            </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer no-print">
+                    Dernière mise à jour {{entity.updatedAt}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

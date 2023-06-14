@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 1.5em"></th>
+                            <th style="width: 10px">#</th>
+                            <th>Matière</th>
+                            <th style="text-align: center;">Critères d'évaluation</th>
+                            <th style="width: 150px; text-align: center;">Note finale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <ng-container *ngFor="let item of list">
+                        <ng-container *ngFor="let grade of item.grades; let i = index">
+                            <tr>
+                                <td *ngIf="i == 0" [attr.rowspan]="item.grades.length * 2" class="class-name">{{item.name}}</td>
+                                <td>{{i+1}}.</td>
+                                <td><strong class="text-primary text-lg">{{grade.subject.label}}</strong></td>
+                                <td style="text-align: center; padding: .25rem">
+                                    <table>
+                                        <tr> <td *ngFor="let subGrade of grade.subGrades">{{subGrade.criterion.name}}</td> </tr>
+                                        <tr> <td *ngFor="let subGrade of grade.subGrades">{{subGrade.value}}</td> </tr>
+                                    </table>
+                                </td>
+                                <td style="text-align: center;">
+                                    {{grade.value}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-0"></td>
+                                <td colspan="3" class="border-0 pt-0">
+                                    <strong>{{grade.subject.teacher?.localeCivility(true)}} {{grade.subject.teacher?.name()}}</strong><br>
+                                    {{grade.comment}}
+                                </td>
+                            </tr>
+                        </ng-container>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

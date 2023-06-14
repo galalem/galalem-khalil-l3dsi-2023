@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <form #formCtrl="ngForm">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <select-input [(ngModel)]="grading" label="Système d'évaluation" name="grading" [required]="true" [options]="GRADING_OPTIONS"/>
+                            </div>
+                            <div class="col-12">
+                                <h5>Critères d'évaluation</h5>
+                            </div>
+                            <ng-container>
+                            <div class="col-2"></div>
+                            </ng-container>
+<!--
+                            <div class="col-12">
+                                <dialog-input label="Enseignant" [display]="entity.teacher.id ? entity.teacher.name() : ''" (requestDialog)="showTeachersDialog()"/>
+                            </div>
+                            <div class="col-12">
+                                <text-input type="color" [(ngModel)]="entity.color" label="Couleur" name="color" [required]="true"/>
+                            </div>
+                            <div class="col-12">
+                                <select-input [(ngModel)]="entity.shared" label="Ciblant" name="shared" [required]="true" [options]="[{value: true, label: 'Toute la classe'}, {value: false, label: 'Elèves Spécifiques'}]"/>
+                            </div>
+                            <div class="col-12" *ngIf="!entity.shared">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <ion-chip [outline]="true" color="primary" *ngIf="!entity.students.length">
+                                            <ion-label>Prénom Nom</ion-label>
+                                            <ion-icon name="close"></ion-icon>
+                                        </ion-chip>
+                                        <ion-chip [outline]="true" color="primary" *ngFor="let student of entity.students">
+                                            <ion-label>{{student.firstName}} {{student.lastName}}</ion-label>
+                                            <ion-icon name="close" (click)="pluckStudent(student.id)"></ion-icon>
+                                        </ion-chip>
+                                        <ion-chip [outline]="false" color="primary" class="no-print" (click)="showStudentsDialog()">
+                                            <ion-icon name="add" class="m-0"></ion-icon>
+                                        </ion-chip>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <data-table [source]="entity.sessions" [config]="dataTableConfig"></data-table>
+                            </div>
+-->
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+                            Soumettre
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

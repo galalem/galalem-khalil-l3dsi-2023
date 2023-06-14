@@ -1,0 +1,7 @@
+<h1 mat-dialog-title class="mat-typography">{{title}}</h1>
+<div mat-dialog-content>
+  <p [innerHTML]="body"></p>
+</div>
+<div mat-dialog-actions>
+  <button *ngFor="let action of actions" class="ml-1 btn btn-sm btn-{{action.theme}}" [mat-dialog-close]="action.value">{{action.label}}</button>
+</div>

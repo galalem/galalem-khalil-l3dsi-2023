@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-lg-9 offset-lg-3 col-12 px-lg-5 px-md-4 px-sm-3 mt-5">
+        <h2 class="mb-1">Contact</h2>
+        <hr>
+        <div class="row pt-3">
+            <div class="col-12">
+                <simple-text-details title="E-mail" icon="envelope" [text]="entity.email"></simple-text-details>
+            </div>
+            <div class="col-6 mt-3">
+                <simple-text-details title="Téléphone" icon="phone" [text]="entity.phone"></simple-text-details>
+            </div>
+            <div class="col-6 mt-3">
+                <simple-text-details title="Téléphone Alternatif" icon="phone"
+                    [text]="entity.phone2"></simple-text-details>
+            </div>
+            <div class="col-12 mt-3">
+                <simple-text-details title="Adresse" icon="map-location-dot" [text]="entity.address.toString()"
+                    [empty]="entity.address.isEmpty()"></simple-text-details>
+            </div>
+        </div>
+    </div>
+</div>

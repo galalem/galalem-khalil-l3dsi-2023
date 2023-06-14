@@ -1,0 +1,38 @@
+<ion-content>
+    <div class="px-2 pt-4 h-100">
+        <app-alert #alert></app-alert>
+        
+        <data-table *ngIf="context?.mode == 'Table';else tree" [source]="list"
+            [config]="dataTableConfig"></data-table>
+        <ng-template #tree>
+            <tree-view [data]="nodes"
+                style="min-height: 100%;">
+                <div class="card card-light h-100" *nodes="let node">
+                    <div class="card-header">
+                        <h3 class="card-title text-center w-100 text-sm">{{node.acronym}}</h3>
+                    </div>
+                    <div class="card-body p-2 text-center">
+                        <ion-chip *ngFor="let class of node.classes">
+                            <span class="badge bg-gray rounded-circle font-weight-normal"
+                                style="margin-inline: -6px 8px;width: 2em;line-height: 1.5;">{{class.students}}</span>
+                            <ion-label>{{class.acronym}} &nbsp;</ion-label>
+                            <ion-icon name="ellipsis-vertical" size="small" class="no-print"
+                                [matMenuTriggerFor]="dropdown.menu"></ion-icon>
+                            <dropdown-menu [items]="class.menu" #dropdown="dropdown"></dropdown-menu>
+                        </ion-chip>
+                    </div>
+                </div>
+            </tree-view>
+        </ng-template>
+        <info-dialog #dialogClassInfo>
+            <ng-container dialog-title>
+                Info Classe
+            </ng-container>
+            <simple-text-details title="Nom" [text]="classInfo.name"/>
+            <simple-text-details title="Acronyme" [text]="classInfo.acronym"/>
+            <simple-text-details title="Effectif" [text]="classInfo.students + ' élèves'"/>
+            <simple-text-details title="À propos" [text]="classInfo.about"/>
+            <div style="margin: 0; min-width: 20vw;"></div>
+        </info-dialog>
+    </div>
+</ion-content>

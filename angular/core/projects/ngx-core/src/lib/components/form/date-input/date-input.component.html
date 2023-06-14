@@ -1,0 +1,22 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <input matInput 
+            #input="ngModel" 
+            [matDatepicker]="picker" 
+            placeholder="jj/mm/aaaa" 
+            (dateChange)="onDateChange($event)"
+            [value]="value"
+            [(ngModel)]="model" 
+            [required]="required" 
+            [readonly]="readonly"
+            [disabled]="disabled">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+        <mat-error *ngIf="input.invalid && (input.dirty || input.touched)" class="text-sm">
+            <span *ngIf="input.errors?.['required']">Ce champ est obligatoire *</span>
+        </mat-error>
+    </mat-form-field>
+</div>

@@ -1,0 +1,135 @@
+.tree-container {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+
+    --arrow-height: var(--tree-branch-height, 2.5rem);
+    --arrow-width: var(--tree-branch-width, 2px);
+    --arrow-style: var(--tree-branch-style, solid);
+    --arrow-color: var(--tree-branch-color, #212529);
+    --arrow-corner-radius: var(--tree-branch-corner-radius, calc(var(--arrow-height) * 0.25));
+    --leaf-min-width: var(--tree-leaf-min-width, 0);
+    --leaf-max-width: var(--tree-leaf-max-width, 9999vw);
+    --gutters: calc(var(--tree-gutters, 1rem) * 0.5);
+
+    margin-bottom: 1rem;
+    min-width: calc((var(--gutters) + var(--leaf-min-width) + var(--gutters)) * var(--grid-cols));
+    max-width: calc((var(--gutters) + var(--leaf-max-width) + var(--gutters)) * var(--grid-cols));
+}
+
+.tree-node {
+    min-width: var(--leaf-min-width);
+    max-width: var(--leaf-max-width);
+}
+
+.tree-node .tree-node-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.tree-node .tree-node-content .node-content {
+    flex-grow: 1;
+    margin: 0 var(--gutters);
+}
+
+.tree-node.parent .line {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: var(--arrow-height);
+    border-inline: calc(var(--arrow-width) / 2) var(--arrow-style) var(--arrow-color);
+}
+.tree-node:not(.parent) .line {
+    display: none;
+}
+
+.tree-node .arrow {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    margin-top: var(--arrow-height);
+    height: var(--arrow-height);
+}
+.tree-node.root .arrow {
+    display: none;
+}
+.tree-node:not(.single) .arrow::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0;
+    border-bottom: var(--arrow-width) var(--arrow-style) var(--arrow-color);
+    position: absolute;
+    left: 0; top: 0;
+}
+.tree-node.extreme .arrow::before {
+    width: calc(50% - var(--arrow-corner-radius));
+}
+.tree-node.extreme.left .arrow::before,
+.tree-node.extreme.center-left .arrow::before {
+    width: calc(50% - var(--arrow-corner-radius));
+    left: unset;
+    right: 0;
+}
+
+.tree-node .arrow span {
+    display: block;
+    height: 100%;
+}
+.tree-node.center .arrow span {
+    position: relative;
+    margin: auto;
+    width: 0;
+    border-inline: calc(var(--arrow-width) / 2) var(--arrow-style) var(--arrow-color);
+}
+.tree-node:not(.center) .arrow span {
+    position: absolute;
+    width: calc(var(--arrow-height) * 0.5);
+    height: var(--arrow-height);
+    border-top: var(--arrow-width) var(--arrow-style) var(--arrow-color);
+    border-left: var(--arrow-width) var(--arrow-style) var(--arrow-color);
+}
+.tree-node.left .arrow span,
+.tree-node.center-left .arrow span {
+    left: 50%;
+    border-right: none;
+    border-left: var(--arrow-width) var(--arrow-style) var(--arrow-color);
+    border-top-left-radius: var(--arrow-corner-radius);
+}
+.tree-node.right .arrow span,
+.tree-node.center-right .arrow span {
+    right: 50%;
+    border-left: none;
+    border-right: var(--arrow-width) var(--arrow-style) var(--arrow-color);
+    border-top-right-radius: var(--arrow-corner-radius);
+}
+
+.tree-node .arrow span::after {
+    content: '';
+    display: block;
+    width: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateX(50%);
+    border: calc(var(--arrow-height) * 0.2) solid;
+    border-color: var(--arrow-color) transparent transparent transparent;
+    border-bottom: none;
+}
+
+.tree-node.left .arrow span::after,
+.tree-node.center-left .arrow span::after {
+    right: unset;
+    left: calc(var(--arrow-width) / -2);
+    transform: translateX(-50%);
+}
+
+.tree-node.right .arrow span::after,
+.tree-node.center-right .arrow span::after {
+    left: unset;
+    right: calc(var(--arrow-width) / -2);
+    transform: translateX(50%);
+}

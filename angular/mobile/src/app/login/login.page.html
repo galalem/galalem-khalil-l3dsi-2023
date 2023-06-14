@@ -1,0 +1,40 @@
+<ion-content>
+  <ngx-preloader></ngx-preloader>
+  <div class="login-panel p-3">
+    <img src="assets/img/logo/logo-large.png"
+      style="width:200px; max-width: 90%; margin-top: -2rem; margin-bottom: 5rem;">
+
+    <div class="input-group">
+      <input class="form-control" type="text" autofocus="" autocomplete="off" [(ngModel)]="username"
+        placeholder="Nom d'utilisateur ou email" aria-invalid="">
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <ngx-fa-icon icon="envelope"></ngx-fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 ml-2 align-self-start" [class.mb-3]="!failed">
+      <span class="text-sm text-danger" *ngIf="failed">Nom d'utilisateur ou mot de passe invalide.</span>
+    </div>
+
+    <div class="input-group">
+      <input class="form-control" type="password" autocomplete="off" [(ngModel)]="password"
+       placeholder="Mot de passe" aria-invalid="">
+
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <ngx-fa-icon icon="lock"></ngx-fa-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 align-self-end text-sm">
+      <a href="javascript:;" (click)="forgotPassword()">Mot de passe oublié?</a>
+    </div>
+
+    <div class="input-group">
+      <button class="btn btn-primary btn-block" [disabled]="!username || !password" (click)="login()">Connexion</button>
+    </div>
+
+  </div>
+</ion-content>

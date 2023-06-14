@@ -1,0 +1,20 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+
+        <input matInput
+            #element
+            [placeholder]="placeholder || ''" 
+            [value]="display" 
+            [readonly]="true">
+
+        <input type="hidden" [(ngModel)]="value"  #input="ngModel" [required]="required">
+
+        <span matTextSuffix><ngx-fa-icon icon="rotate" class="btn text-info" (click)="callDialog()"></ngx-fa-icon></span>
+
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+        <mat-error *ngIf="input.invalid && (input.dirty || input.touched)" class="text-sm">
+            <span *ngIf="input.errors?.['required']">Ce champ est obligatoire *</span>
+        </mat-error>
+    </mat-form-field>
+</div>

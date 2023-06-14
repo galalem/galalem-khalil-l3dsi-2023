@@ -1,0 +1,130 @@
+<div class="card card-light">
+  <div class="card-header">
+    <h3 class="card-title" style="line-height: 1.5;">
+      <button class="btn btn-sm mx-1 text-dark no-print" [matMenuTriggerFor]="displayedColumnsDropdown.menu">
+        <ngx-fa-icon icon="list" class="mr-1"></ngx-fa-icon>
+      </button>
+      <dropdown-menu #displayedColumnsDropdown="dropdown" [items]="displayedColumnsMenu">
+        <div dropdown-header><span class="dropdown-item dropdown-header">Colonnes Visibles</span></div>
+      </dropdown-menu>
+      {{config.title}} 
+      <span class="text-condensed text-muted pl-1" *ngIf="config.selection && selection.selected.length"> &#x2022; {{selection.selected.length}} sélectionnés</span>
+    </h3>
+    <div class="card-tools no-print">
+      <a type="button" class="btn btn-sm btn-success mx-1" [routerLink]="config.actions.add.routerLink" *ngIf="config.actions.add.enabled && config.actions.add.routerLink">
+        <ngx-fa-icon [icon]="config.actions.add.icon" [type]="config.actions.add.iconType" class="mr-1"></ngx-fa-icon> {{config.actions.add.label}}
+      </a>
+      <button type="button" class="btn btn-sm btn-success mx-1" *ngIf="config.actions.add.enabled && !config.actions.add.routerLink" (click)="config.actions.add.onClick()">
+        <ngx-fa-icon [icon]="config.actions.add.icon" [type]="config.actions.add.iconType" class="mr-1"></ngx-fa-icon> {{config.actions.add.label}}
+      </button>
+
+      <button class="btn btn-sm btn-info mx-1" [matMenuTriggerFor]="importDropdown.menu" *ngIf="config.actions.import.enabled">
+        <ngx-fa-icon [icon]="config.actions.import.icon" [type]="config.actions.import.iconType" class="mr-1"></ngx-fa-icon> {{config.actions.import.label}}
+      </button>
+      <dropdown-menu #importDropdown="dropdown" [items]="config.actions.import.options"></dropdown-menu>
+
+      <button class="btn btn-sm btn-primary mx-1" [matMenuTriggerFor]="exportDropdown.menu" *ngIf="config.actions.export.enabled && config.selection && selection.selected.length">
+        <ngx-fa-icon [icon]="config.actions.export.icon" [type]="config.actions.export.iconType" class="mr-1"></ngx-fa-icon> {{config.actions.export.label}}
+      </button>
+      <dropdown-menu #exportDropdown="dropdown" [items]="config.actions.export.options"></dropdown-menu>
+
+      <a type="button" class="btn btn-sm btn-danger mx-1" [routerLink]="config.actions.delete.routerLink" *ngIf="config.actions.delete.enabled && config.actions.delete.routerLink">
+        <ngx-fa-icon [icon]="config.actions.delete.icon" [type]="config.actions.delete.iconType" class="mr-1"></ngx-fa-icon> {{config.actions.delete.label}}
+      </a>
+      <button type="button" class="btn btn-sm btn-danger mx-1" *ngIf="config.actions.delete.enabled && !config.actions.delete.routerLink" (click)="config.actions.delete.onClick(selection.selected)">
+        <ngx-fa-icon [icon]="config.actions.delete.icon" [type]="config.actions.delete.iconType" class="mr-1"></ngx-fa-icon> {{config.actions.delete.label}}
+      </button>
+
+      <button class="btn btn-sm btn-checkbox mx-1" [matMenuTriggerFor]="selectionDropdown.menu" *ngIf="config.selection && selection.selected.length">
+        <ngx-fa-icon icon="ellipsis"></ngx-fa-icon>
+      </button>
+      <dropdown-menu #selectionDropdown="dropdown" [items]="selectionActions"></dropdown-menu>
+
+    </div>
+  </div>
+  <div class="card-header p-0 no-print">
+    <mat-expansion-panel style="border-radius: 0; box-shadow: none;" hideToggle (opened)="filtersOpen = true" (closed)="filtersOpen = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <ngx-fa-icon icon="angles-right" class="mr-2" [rotate]="filtersOpen ? 90 : undefined"></ngx-fa-icon> Filtres de Recherche <span class="text-condensed text-muted pl-1"> &#x2022; {{dataSource.filteredData.length}} résultats trouvés</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-12" *ngIf="filters.length === 0">
+          [ aucun filtre est disponible ]
+        </div>
+        <div *ngFor="let filter of filters" [class]="filter.classes">
+          <text-input *ngIf="filter.datatype == 'string'"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel">
+          </text-input>
+          <number-range *ngIf="filter.datatype == 'number'"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel">
+          </number-range>
+          <date-range *ngIf="filter.datatype == 'date'"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel"
+            start-placeholder="Date début" end-placeholder="Date fin">
+          </date-range>
+          <checkbox *ngIf="filter.datatype == 'boolean'"
+            [label-on]="filter.checkbox?.labelOn"
+            [label-off]="filter.checkbox?.labelOff"
+            [label-in]="filter.checkbox?.labelIn"
+            [indeterminate]="true"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel">
+          </checkbox>
+        </div>
+        <div class="col-12" *ngIf="filters.length > 0">
+          <button class="btn btn-default btn-block" (click)="applyFilters()">Appliquer</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div class="card-body" style="overflow-x: auto;">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="select" *ngIf="config.selection">
+            <th mat-header-cell *matHeaderCellDef class="no-print">
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row" class="no-print">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? toggleRow(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+        </ng-container>
+      
+        <!-- Column -->
+        <ng-container *ngFor="let coldef of config.columns" [matColumnDef]="coldef.ref">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!coldef.sortable"> {{coldef.label}} </th>
+          <td mat-cell *matCellDef="let element"> 
+            <span *ngIf="coldef.display != undefined" [innerHTML]="coldef.display(element[coldef.ref])"></span>
+            {{ coldef.display != undefined ? '' : element[coldef.ref]}} 
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action" *ngIf="config.actions?.enabled">
+            <th mat-header-cell *matHeaderCellDef class="text-center no-print"> Actions </th>
+            <td mat-cell *matCellDef="let element" class="text-center no-print">
+              <button class="btn mx-1" [matMenuTriggerFor]="actionDropdown.menu"><ngx-fa-icon icon="ellipsis"></ngx-fa-icon></button>
+              <dropdown-menu #actionDropdown="dropdown" [items]="element.DATA_TABLE_ACTION_MENU"></dropdown-menu>
+            </td>
+        </ng-container>
+      
+        <!-- Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr *matNoDataRow><td [attr.colspan]="displayedColumns.length" style="padding: 1.5rem;"><empty></empty></td></tr>
+    </table>
+  </div>
+  <div class="card-footer no-print">
+    <mat-paginator style="background: none;" *ngIf="config.pagination" [length]="50" [pageSizeOptions]="[5, 10, 20, 50, 100, 1000]" showFirstLastButtons aria-label="Sélectionner la page"></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<ion-content>
+    <div class="p2">
+        <app-alert #alert></app-alert>
+        
+        <div class="card card-light mb-0">
+            <div class="card-header">                    
+                <h3 class="card-title" style="line-height: 1.5;">Détails</h3>
+            </div>
+            <div class="card-body">
+                <div class="row px-lg-4 px-md-3 px-sm-2">
+                    <div class="col-12 mb-3">
+                        <h1 class="mb-1">{{entity.name}}</h1>
+                        <h3 class="m-0 text-secondary">{{entity.acronym}}</h3>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <simple-text-details title="E-mail" icon="envelope" [text]="entity.email"></simple-text-details>
+                    </div>
+                    <div class="col-12 mb-1 px-lg-4 px-md-3 px-sm-2">
+                        <simple-text-details title="Téléphone" icon="phone" [text]="entity.phone"></simple-text-details>
+                    </div>
+                    <div class="col-12 mb-4 px-lg-4 px-md-3 px-sm-2">
+                        <simple-text-details title="Notes" icon="note-sticky" [text]="entity.about"></simple-text-details>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">                    
+                                <h3 class="card-title" style="line-height: 1.5;">Niveaux</h3>
+                            </div>
+                            <div class="card-body p-lg-4 p-md-3 p-sm-2 bg-light">
+                                <tree-view [data]="levels" class="mt-3" 
+                                    style="--tree-branch-height: 1.5rem; --tree-leaf-min-width: 10rem; display: block; overflow-x: auto;">
+                                    <div class="card h-100" *nodes="let node">
+                                        <div class="card-body p-2 text-dark text-center">
+                                            {{node.name}}
+                                            <div class="text-center text-sm text-muted">( {{node.acronym}} )</div>
+                                        </div>
+                                    </div>
+                                </tree-view>
+                                <empty *ngIf="!levels.length"></empty>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="card-footer">
+                Dernière mise à jour était le {{entity.updatedAt}}
+            </div>
+        </div>
+    </div>
+</ion-content>

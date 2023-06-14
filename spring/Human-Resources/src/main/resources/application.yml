@@ -1,0 +1,4 @@
+keycloak:
+  resource: human-resources
+  credentials:
+    secret: REST_API_SECRET_KEY_HERE

@@ -1,0 +1,78 @@
+<ion-content>
+<div class="p-2">
+    <app-alert #alert></app-alert>
+
+    <div class="card">
+        <mat-expansion-panel style="border-radius: 0; box-shadow: none; background-color: transparent;">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h5><ngx-fa-icon icon="paintbrush"/> &nbsp; Personnalisation</h5>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="card-body">
+                <h5>Horaires</h5>
+                <div class="form-group d-flex" style="gap: .25rem;">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">de</span>
+                        </div>
+                        <input type="time" class="form-control" value="08:00" (change)="start = extractTime($event)"/>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">à</span>
+                        </div>
+                        <input type="time" class="form-control" value="18:00" (change)="end = extractTime($event)"/>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">durée</span>
+                        </div>
+                        <input type="number" class="form-control" value="60" [(ngModel)]="intervals"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text">min</span>
+                        </div>
+                    </div>
+                </div>
+                <h5>Jours</h5>
+                <div class="form-group d-flex" style="gap: .25rem;">
+                    <div class="input-group" *ngFor="let day of days; let i = index">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <input type="checkbox" [(ngModel)]="day.checked" (change)="onCheckboxChange(i)" style="cursor: pointer;"/>
+                            </span>
+                        </div>
+                        <label class="form-control font-weight-normal" [class.bg-danger]="!day.checked">{{day.label}}</label>
+                    </div>
+                </div>
+                <h5>Taille</h5>
+                <div class="form-group d-flex" style="gap: .25rem;">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Hauteur Ligne</span>
+                        </div>
+                        <input type="text" class="form-control" value="80px" #cellHeight/>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Largeur Colonne</span>
+                        </div>
+                        <input type="text" class="form-control" value="186px" #cellWidth/>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Largeur Jours</span>
+                        </div>
+                        <input type="text" class="form-control" value="100px" #dayHeaderWidth/>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </div>
+
+    <schedule [style]="'--cell-width: '+cellWidth.value+'; --cell-height: '+cellHeight.value+'; --day-header-width: '+dayHeaderWidth.value"
+        [intervals]="intervals" [start]="start" [end]="end" [days]="rows" [data]="data">
+    </schedule>
+</div>
+</ion-content>

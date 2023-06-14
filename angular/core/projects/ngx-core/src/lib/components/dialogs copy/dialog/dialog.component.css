@@ -1,0 +1,180 @@
+dialog {
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+  outline: 0;
+}
+
+dialog[open] {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dialog-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.dialog-header .close {
+  padding: 1rem;
+  margin: -1rem -1rem -1rem auto;
+}
+
+.dialog-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: inherit;
+}
+
+.dialog-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+.dialog-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-start;
+  padding: 0.75rem;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+
+.dialog-footer>* {
+  margin: 0.25rem;
+}
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+
+  .modal-dialog-scrollable {
+    max-height: calc(100% - 3.5rem);
+  }
+
+  .modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 3.5rem);
+  }
+
+  .modal-dialog-centered {
+    min-height: calc(100% - 3.5rem);
+  }
+
+  .modal-dialog-centered::before {
+    height: calc(100vh - 3.5rem);
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+  }
+
+  .modal-content {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .modal-lg,
+  .modal-xl {
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 1140px;
+  }
+}
+
+dialog.bg-warning .dialog-header,
+dialog.bg-warning .dialog-footer {
+  border-color: #343a40;
+}
+
+dialog.bg-primary .close,
+dialog.bg-secondary .close,
+dialog.bg-info .close,
+dialog.bg-danger .close,
+dialog.bg-success .close {
+  color: #fff;
+  text-shadow: 0 1px 0 #000;
+}
+
+.dark-mode .dialog-header,
+.dark-mode .dialog-footer {
+  border-color: #6c757d;
+}
+
+.dark-mode dialog {
+  background-color: #343a40;
+}
+
+.dark-mode dialog.bg-warning .dialog-header,
+.dark-mode dialog.bg-warning .dialog-footer {
+  border-color: #6c757d;
+}
+
+.dark-mode dialog.bg-warning .close {
+  color: #343a40 !important;
+  text-shadow: 0 1px 0 #495057 !important;
+}
+
+.dark-mode dialog.bg-primary .dialog-header,
+.dark-mode dialog.bg-primary .dialog-footer,
+.dark-mode dialog.bg-secondary .dialog-header,
+.dark-mode dialog.bg-secondary .dialog-footer,
+.dark-mode dialog.bg-info .dialog-header,
+.dark-mode dialog.bg-info .dialog-footer,
+.dark-mode dialog.bg-danger .dialog-header,
+.dark-mode dialog.bg-danger .dialog-footer,
+.dark-mode dialog.bg-success .dialog-header,
+.dark-mode dialog.bg-success .dialog-footer {
+  border-color: #fff;
+}
+
+
+.h4, h4 {
+  font-size: 1.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}

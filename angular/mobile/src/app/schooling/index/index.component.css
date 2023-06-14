@@ -1,0 +1,14 @@
+tree-view {
+  --tree-branch-height: 2rem;
+  --tree-leaf-min-width: 13rem;
+  display: block;
+  overflow-x: auto;
+}
+
+ion-chip .badge {
+  margin-inline: -6px 8px;
+  width: 2em;
+  line-height: 1.5;
+  font-weight: normal !important;
+  border-radius: 100vmax;
+}

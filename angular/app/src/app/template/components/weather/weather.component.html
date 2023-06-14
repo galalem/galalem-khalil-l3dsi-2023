@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-body text-white d-flex" style="flex-direction: column;">
+        <h2 class="m-0">{{day}}</h2>
+        <div>{{date}}</div>
+        <p class="mt-1"><ngx-fa-icon icon="location-dot"/> Houmet Souk</p>
+        <div style="flex: 1; min-height: 3rem; font-size:4rem; display: flex; align-items: center; justify-content: center;">
+            <ngx-fa-icon [icon]="weather.icon"></ngx-fa-icon>
+        </div>
+        <span style="font-size: 3rem; line-height: 1.1;">{{temperature}}°C</span>
+        <span>{{weather.label}}</span>
+        
+    </div>
+</div>

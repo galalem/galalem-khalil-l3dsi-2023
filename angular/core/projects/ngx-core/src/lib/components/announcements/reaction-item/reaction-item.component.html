@@ -1,0 +1,20 @@
+<div class="reaction-container" *ngIf="placeholder">
+    <div class="user-picture">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </div>
+    <div class="username">
+        <ion-skeleton-text [animated]="true" style="width: 70%; height: 1.5rem;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+    </div>
+</div>
+<div class="reaction-container" *ngIf="placeholder !== true">
+    <div class="user-picture">
+        <profile-picture [src]="data.picture" alt="User Image" 
+            style-native="width: 48px; aspect-ratio: 1/1; border-radius: 50%;"></profile-picture>
+        <img [src]="'assets/img/reactions/'+data.reaction+'.png'" alt="Reaction"> 
+    </div>
+    <div class="username">
+        <div><strong>{{data.name}}</strong></div>
+        <span class="text-sm text-secondary">{{data.role}}</span>
+    </div>
+</div>

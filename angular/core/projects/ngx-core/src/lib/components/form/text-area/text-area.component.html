@@ -1,0 +1,30 @@
+<div class="{{classes}}">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+
+        <textarea matInput 
+        #input="ngModel"
+        #element
+        [attr.maxlength]="maxlength" 
+        [attr.minlength]="minlength" 
+        [placeholder]="placeholder || ''" 
+        [rows]="rows || 4"
+        [(ngModel)]="value" 
+        [pattern]="pattern || '.*'" 
+        [required]="required" 
+        [readonly]="readonly" 
+        [disabled]="disabled"></textarea>
+        <mat-hint align="end" *ngIf="counter" class="text-sm text-muted">{{element.value.length}}{{maxlength ? '/'+maxlength : ''}}</mat-hint>
+
+        <span matTextPrefix *ngIf="textPrefix">{{textPrefix}}</span>
+        <span matTextSuffix *ngIf="textSuffix">{{textSuffix}}</span>
+
+        <mat-hint *ngIf="hint" class="text-sm text-muted">{{hint}}</mat-hint>
+        <mat-error *ngIf="input.invalid && (input.dirty || input.touched)" class="text-sm">
+            <span *ngIf="input.errors?.['required']">Ce champ est obligatoire *</span>
+            <span *ngIf="input.errors?.['minlength']">Ce champ doit contenir au moins {{minlength}} caractères</span>
+            <span *ngIf="input.errors?.['minlength']">Ce champ doit contenir au max {{maxlength}} caractères</span>
+            <span *ngIf="input.errors?.['pattern']">Ce champ ne respecte pas le modèle</span>
+        </mat-error>
+    </mat-form-field>
+</div>

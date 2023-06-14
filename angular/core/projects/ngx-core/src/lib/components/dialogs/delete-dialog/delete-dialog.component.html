@@ -1,0 +1,8 @@
+<h1 mat-dialog-title class="mat-typography">Supprimer</h1>
+<div mat-dialog-content>
+  <p>Êtes-vous sûr de bien vouloir supprimer {{data.subject}}.<br>Cette action est irréversible!</p>
+</div>
+<div mat-dialog-actions>
+  <button class="ml-1 btn btn-sm btn-secondary" [mat-dialog-close]="false">Non Merci</button>
+  <button class="ml-1 btn btn-sm btn-danger" [mat-dialog-close]="true">Supprimer</button>
+</div>

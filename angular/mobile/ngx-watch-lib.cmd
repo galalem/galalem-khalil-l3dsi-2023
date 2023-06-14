@@ -1,0 +1,1 @@
+cd ../core && ng build ngx-core && cd ../mobile &&  ng cache clean && ionic serve --host=192.168.1.100 --port=9000

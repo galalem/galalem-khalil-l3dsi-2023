@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <form #formCtrl="ngForm">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <text-input [(ngModel)]="entity.label" label="Libelle" name="label" [required]="true"/>
+                            </div>
+                            <div class="col-12">
+                                <date-input [(ngModel)]="entity.start" label="Date début" name="start" [required]="true"/>
+                            </div>
+                            <div class="col-12">
+                                <date-input [(ngModel)]="entity.end" label="Date fin" name="end" [required]="true"/>
+                            </div>
+                            <div class="col-12">
+                                <date-input [(ngModel)]="entity.deadline" label="Date limite de remise des notes" name="deadline" [required]="true"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+                            Soumettre
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

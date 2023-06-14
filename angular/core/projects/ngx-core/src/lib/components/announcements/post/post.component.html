@@ -1,0 +1,63 @@
+<div class="card card-widget" #post>
+    <div class="card-body pt-3 pb-2">
+        <div class="user-block mb-4" style="float: none;">
+            <img class="img-circle" [src]="data.author.picture | secure | async" alt="User Image">
+            <span class="username">{{data.author.name}} &#x2022; {{data.author.role}}</span>
+            <span class="description"><ngx-fa-icon style="margin-right: 0.125em;" [icon]="getTargetIcon(data.target)"></ngx-fa-icon> {{getTargetLabel(data.target)}} <span class="text-md" style="padding: 0 0.125em">&#x2022;</span> <span style="text-transform: lowercase;">{{data.createdAt}}</span></span>
+        </div>            
+
+        <h4>{{data.title}}</h4>
+        <p>
+            <span [innerHTML]="bodyExpanded ? data.content : trimHTML(data.content)"></span>
+            <span class="expand-toggle" (click)="bodyExpanded = !bodyExpanded" *ngIf="textTooLong"> {{bodyExpanded ? 'voir moins' : '...voir plus'}}</span>
+        </p>
+
+        <image-slider [images]="data.attachments" *ngIf="hasImages"></image-slider>
+        <app-attachments [items]="data.attachments" *ngIf="hasAttachments"></app-attachments>
+
+        <post-comments 
+            [trigger]="'comments-modal-' + data.id"
+            [post-id]="data.id"
+            [top-reactions]="topReactions"
+            [reactions]="data.reactions"
+            [user]="currentUser"
+            [submit-comment-url]="postUrl"
+            [load-comments-url]="getCommentsUrl"
+            [load-reactions-url]="getReactionsUrl">
+        </post-comments>
+
+        <div class="row mt-2 mb-1 text-sm text-muted" style="justify-content: space-between;">
+            <div style="display: inline-block;" *ngIf="data.reactionsEnabled">
+                <img *ngIf="topReactions.length > 2" [src]="topReactions[2]" style="z-index: 3;" class="reactions-stat-img">
+                <img *ngIf="topReactions.length > 1" [src]="topReactions[1]" style="z-index: 2;" class="reactions-stat-img">
+                <img *ngIf="topReactions.length > 0" [src]="topReactions[0]" style="z-index: 1;" class="reactions-stat-img mr-1">
+                <span *ngIf="topReactions.length > 0">{{getTotalReactions(data.reactions)}}</span>
+            </div>
+            <div style="display: inline-block;" class="text-right">
+                <span *ngIf="data.commentsEnabled">{{formatNumber(data.reactions.comment)}} commentaires</span>
+                <span class="px-1" *ngIf="data.commentsEnabled">&#x2022;</span>
+                <span>{{formatNumber(data.reactions.view)}} vues</span>
+            </div>
+        </div>
+        <div class="row border-top" *ngIf="data.commentsEnabled || data.reactionsEnabled">
+            <div class="col-6 pt-2" style="position: relative;" [class.col-6]="data.commentsEnabled" [class.col-12]="!data.commentsEnabled" *ngIf="data.reactionsEnabled">
+                
+                <button class="btn text-sm btn-block text-{{getReactionTheme()}}" (mousedown)="toggleReactions = true" (touchstart)="toggleReactions = true">
+                    <ngx-fa-icon style="margin-right: 0.125em;" [icon]="getReactionIcon()" [type]="getReactionIconType()"></ngx-fa-icon> {{getReactionLabel()}}
+                </button>
+
+                <div class="reactions" [class.visible]="toggleReactions">
+                    <button *ngFor="let reaction of reactions" class="btn react-btn" [title]="reaction.label" (mouseup)="onReact($event, reaction.reaction)">
+                        <img [src]="reaction.image">
+                    </button>
+                </div>
+                
+            </div>
+            <div class="pt-2" [class.col-6]="data.reactionsEnabled" [class.col-12]="!data.reactionsEnabled" *ngIf="data.commentsEnabled">
+                <button class="btn text-sm btn-block text-secondary" [id]="'comments-modal-' + data.id">
+                    <ngx-fa-icon style="margin-right: 0.125em;" type="regular" icon="comment"></ngx-fa-icon> Commenter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12">
+            <div class="card card-light">
+                <div class="card-header">                    
+                    <h3 class="card-title" style="line-height: 1.5;">Détails</h3>
+                    <div class="card-tools">
+                        <a type="button" class="btn btn-sm btn-warning mx-1" [routerLink]="['/human-resources/parents/' + entity.id + '/edit' ]">
+                            <ngx-fa-icon [icon]="EditIcon" class="mr-1"></ngx-fa-icon> Modifier
+                        </a>
+                        <button type="button" class="btn btn-sm btn-danger mx-1" (click)="showDeleteDialog()">
+                            <ngx-fa-icon [icon]="DeleteIcon" class="mr-1"></ngx-fa-icon> Supprimer
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <img [src]="entity.photo | secure | async" alt="Photo" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 0.25rem;">
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-6 col-12 px-lg-5 px-md-4 px-sm-3 mt-sm-0 mt-3">
+                            <h1 class="mb-1">{{this.entity.localeCivility(true)}} {{entity.firstName}} {{entity.lastName}}</h1>
+                            <h3 class="mb-4 text-secondary">#{{entity.code}}</h3>
+                            <p class="lead text-justify text-muted text-sm">{{entity.about || '[ aucune description, remarques ou informations additionnelles  ]'}}</p>
+                        </div>
+                        <div class="col-lg-9 offset-lg-3 col-12 px-lg-5 px-md-4 px-sm-3 mt-3">
+                            <h2 class="mb-1">Identité</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-3">
+                                    <h6 class="text-muted text-sm mb-1">Sexe</h6>
+                                    <div class="text-lg"><ngx-fa-icon class="mr-1" [icon]="entity.gender == FEMALE ? 'venus' : 'mars'"></ngx-fa-icon> {{entity.localeGender()}}</div>
+                                </div>
+                                <div class="col-5">
+                                    <simple-text-details title="Prénom" [text]="entity.firstName"></simple-text-details>
+                                </div>
+                                <div class="col-4">
+                                    <simple-text-details title="Nom" [text]="entity.lastName"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Date et Lieu de naissance" [text]="'le ' + entity.dateOfBirth + ' à ' + entity.placeOfBirth"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Nationalité" [icon]="faEarth" [text]="entity.nationality"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Pièce d'Identité" [icon]="faIdCard" 
+                                        [text]="entity.localeIdType() + ' No. ' + entity.idNumber + ' délivrée le ' + entity.idDateOfIssue + ' à ' + entity.idPlaceOfIssue">
+                                    </simple-text-details>
+                                </div>
+                            </div>
+
+                            <h2 class="mb-1 mt-5">Informations Additionelles</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-12">
+                                    <simple-text-details title="Profession" [icon]="faFileSignature" [text]="entity.profession + ' à ' + entity.organisation"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="État civil" [icon]="faRing" [text]="entity.localeMaritalStatus()"></simple-text-details>
+                                </div>
+                            </div>
+
+                            <h2 class="mb-1 mt-5">Contact</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-12">
+                                    <simple-text-details title="E-mail" [icon]="EmailIcon" [text]="entity.email"></simple-text-details>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <simple-text-details title="Téléphone" [icon]="PhoneIcon" [text]="entity.phone"></simple-text-details>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <simple-text-details title="Téléphone Alternatif" [icon]="PhoneIcon" [text]="entity.phone2"></simple-text-details>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <simple-text-details title="Adresse" [icon]="AddressIcon" [text]="entity.address.toString()" [empty]="entity.address.isEmpty()"></simple-text-details>
+                                </div>
+                            </div>
+
+                            <h2 class="mb-1 mt-5">Enfants</h2>
+                            <hr>
+                            <div class="row pt-3">
+                                <div class="col-12 mb-4" *ngFor="let child of entity.children">
+                                    <div class="user-block">
+                                        <img class="img-circle" [src]="child.photo" alt="User Image">
+                                        <span class="username">{{child.firstName}} {{child.lastName}}</span>
+                                        <span class="description">Classe sera affichée ici</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Dernière mise à jour {{entity.updatedAt}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

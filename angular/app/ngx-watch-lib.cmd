@@ -1,0 +1,1 @@
+cd ../core && ng build ngx-core && cd ../app &&  ng cache clean && ng serve

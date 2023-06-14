@@ -1,0 +1,98 @@
+.time > button.btn {
+    font-size: 12px;
+    padding: 3px 7px;
+    margin-block: -3px;
+}
+
+.back-to-school-img {
+    width: 30%;
+    max-width: 250px;
+}
+
+.back-to-school-separator {
+    width: 0;
+    align-self: stretch;
+    border: 1px solid #dee2e6;
+    border-radius: 1px;
+    margin-inline: 2rem;
+}
+
+.back-to-school-text {
+    font-family: 'Comic Sans MS';
+    font-size: 5vw;
+    font-weight: bold;
+    flex: 1;
+    line-height: 1;
+    margin: 0;
+}
+.back-to-school-text::before {
+    content: "";
+    animation: type 2500ms linear 0ms infinite forwards alternate;
+}
+.back-to-school-text::after {
+    content: "|";
+    animation: blink 500ms linear infinite forwards;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    color: #343a40;
+}
+
+@keyframes type {
+    0%,22% {
+      content: "";
+    }
+    24% {
+      content: "R";
+    }
+    27% {
+      content: "Re";
+    }
+    28% {
+      content: "Ren";
+    }
+    31% {
+      content: "Rent";
+    }
+    34% {
+      content: "Rentr";
+    }
+    37% {
+      content: "Rentré";
+    }
+    40% {
+      content: "Rentrée";
+    }
+    50% {
+      content: "Rentrée S";
+    }
+    53% {
+      content: "Rentrée Sc";
+    }
+    56% {
+      content: "Rentrée Sco";
+    }
+    58% {
+      content: "Rentrée Scol";
+    }
+    61% {
+      content: "Rentrée Scola";
+    }
+    64% {
+      content: "Rentrée Scolai";
+    }
+    67% {
+      content: "Rentrée Scolair";
+    }
+    70%, 100% {
+      content: "Rentrée Scolaire";
+    }
+}
+
+@keyframes blink {
+    0%,29%,71%,100% {
+        opacity: 0;
+    }
+    30%, 70% {
+        opacity: 1;
+    }
+}

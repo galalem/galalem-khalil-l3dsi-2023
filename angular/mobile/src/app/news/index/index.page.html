@@ -1,0 +1,94 @@
+<ion-content>
+    <div class="py-2">
+        <div class="card mb-2" *ngIf="redactor">
+            <mat-expansion-panel style="border-radius: 0; box-shadow: none; background-color: transparent;"
+                (opened)="entity.openForm = true" (closed)="entity.openForm = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5>{{entity.id == 0 ? 'Ajouter une Publication' : 'Modifier la publication #'+entity.id}}</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+    
+                <div class="card-body">
+                    <h5>Public Cible</h5>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select type="text" class="form-control" [(ngModel)]="entity.target">
+                                <option value="PUBLIC" selected>Tout le monde</option>
+                                <option value="CLASS" disabled>Classes Spécifique</option>
+                                <option value="TEACHER">Enseignants Spécifiques</option>
+                                <option value="PARENT">Parents Spécifiques</option>
+                                <option value="STUDENT">Élèves Spécifiques</option>
+                            </select>
+                            <div class="input-group-append" *ngIf="entity.target != 'PUBLIC'">
+                                <button class="btn btn-info" (click)="showSelectDialog()"><ngx-fa-icon
+                                        icon="hand-pointer"></ngx-fa-icon></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>Date de Publication</h5>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="datetime-local" class="form-control" [(ngModel)]="entity.createdAt">
+                        </div>
+                        <span class="text-sm text-muted">automatique par default</span>
+                    </div>
+                    <h5>Titre</h5>
+                    <div class="form-group">
+                        <input type="text" class="form-control" [(ngModel)]="entity.title">
+                    </div>
+                    <h5>Détails</h5>
+                    <!--<ckeditor [editor]="Editor" [config]="EditorConfig" [(ngModel)]="entity.content"></ckeditor>-->
+                    <h5>Pièces Jointes</h5>
+                    <files-dropzone [overwrite]="false" [multiple]="true"
+                        [(ngxModel)]="entity.attachments"></files-dropzone>
+                    <h5>Interactions</h5>
+                    <div class="form-group">
+                        <div class="custom-control custom-switch mr-4" style="display: inline-block;">
+                            <input type="checkbox" [(ngModel)]="entity.reactionsEnabled" class="custom-control-input"
+                                id="enable-reactions">
+                            <label class="custom-control-label font-weight-normal"
+                                for="enable-reactions">Réactions</label>
+                        </div>
+                        <div class="custom-control custom-switch" style="display: inline-block;">
+                            <input type="checkbox" [(ngModel)]="entity.commentsEnabled" class="custom-control-input"
+                                id="enable-comments">
+                            <label class="custom-control-label font-weight-normal"
+                                for="enable-comments">Commentaires</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" (click)="onSubmit()">Publier</button>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    
+        <div class="card mb-4" *ngIf="birthdays.length > 0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3 px-2">
+                        <img src="assets/img/birthday.png" style="width: 100%; max-width: 100px;">
+                    </div>
+                    <div class="col-9 d-flex">
+                        <h4 class="mt-0 align-self-center">C'est l'anniversaire de {{birthdays}}</h4>
+                    </div>
+                    <div class="col-12 text-justify text-md p-2">
+                        Toute l'équipe des Nouvelles Générations tenais à vous souhaiter <b>Un
+                            Joyeux anniversaire</b>. Un an de plus, c’est un pas de plus vers le succès !
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <announcement-post *ngFor="let post of posts" [data]="post"
+            (reacted)="onReacted(post.id, $event)" [user]="userinfo"
+            [submit-comment-url]="postUrl"
+            [load-comments-url]="getCommentsUrl"
+            [load-reactions-url]="getReactionsUrl"></announcement-post>
+    
+    
+        <ion-infinite-scroll *ngIf="loadMore" (ionInfinite)="onIonInfinite($event)">
+            <ion-infinite-scroll-content loadingText="Veuillez patienter..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        
+    </div>
+</ion-content>

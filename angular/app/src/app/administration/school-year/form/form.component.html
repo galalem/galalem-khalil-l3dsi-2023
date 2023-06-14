@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-alert #alert></app-alert>
+      </div>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body pt-5">
+          <form #formCtrl="ngForm">
+
+            <text-input label="Année Scolaire" [placeholder]="placeholder" pattern="\d{4}-\d{4}" [(ngModel)]="schoolYear" name="school-year" [required]="true"></text-input>
+
+            <div class="row mt-3">
+                <div [class]="'col-' + (regime == 1 ? 6 : 12)">
+                    <select-input label="Régime" name="regime" [(ngModel)]="regime" [options]="REGIME_OPTIONS"></select-input>
+                </div>
+                <div class="col-6" *ngIf="regime == 1">
+                    <text-input label="Nombre de Périodes" name="periods" type="number" [(ngModel)]="periods"></text-input>
+                </div>
+            </div>
+
+<!--             <date-range *ngFor="let range of ranges; let i = index;" [value]="range" (ngModelChange)="range.start = $event.start; range.end = $event.end;" [required]="true" -->
+            <date-range *ngFor="let range of ranges; let i = index;" [(ngModel)]="ranges[i].data" [required]="true"
+                [label]="(regime == 3 ? 'Trimèstre' : (regime == 2 ? 'Semèstre' : 'Période')) + ' ' + (i + 1)" name="range-{{i}}"></date-range>
+                
+
+            <div class="mt-3">
+              <mat-accordion multi>
+                  <mat-expansion-panel *ngFor="let department of departments; let index = index" [disabled]="department.config == 'none'" 
+                      [expanded]="department.config == 'auto' ? undefined : department.config == 'manual'">
+                      <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <span>
+                              <ion-segment (click)="$event.stopPropagation()" [(ngModel)]="department.config" name="config[]">
+                                <ion-segment-button value="none" matTooltip="Exclure">
+                                  <ion-icon name="ban" color="danger"></ion-icon>
+                                </ion-segment-button>
+                                <ion-segment-button value="auto" matTooltip="Automatique">
+                                  <ion-icon name="flash" color="warning"></ion-icon>
+                                </ion-segment-button>
+                                <ion-segment-button value="manual" matTooltip="Manuelle">
+                                  <ion-icon name="build" color="success"></ion-icon>
+                                </ion-segment-button>
+                              </ion-segment>
+                            </span>
+                            <strong class="text-dark ml-3">{{department.name}}</strong> &nbsp; <i class="text-muted" *ngIf="department.config == 'none'">(exclu)</i>
+                          </mat-panel-title>
+                      </mat-expansion-panel-header>
+
+                      <div class="card-body" *ngIf="department.config == 'auto'">
+                        <div class="row">
+                          <div [class]="'col-' + (regime == 1 ? 6 : 12)">
+                              <select-input label="Régime" name="regime" [ngModel]="regime" (ngModelChange)="departments[index].regime = $event" [options]="REGIME_OPTIONS" [disabled]="true"></select-input>
+                          </div>
+                          <div class="col-6" *ngIf="regime == 1">
+                              <text-input label="Nombre de Périodes" name="periods" type="number" [ngModel]="periods" (ngModelChange)="departments[index].periods= $event" [disabled]="true"></text-input>
+                          </div>
+                        </div>
+                      
+                        <date-range *ngFor="let range of ranges; let i = index;" [ngModel]="ranges[i].data" (ngModelChange)="department.ranges[i] = $event" [disabled]="true" [required]="true"
+                          [label]="(regime == 3 ? 'Trimèstre' : (regime == 2 ? 'Semèstre' : 'Période')) + ' ' + (i + 1)" name="dept-{{index}}-range-{{i}}-auto"></date-range>
+                      </div>
+
+                      <div class="card-body" *ngIf="department.config == 'manual'">
+                        <div class="row">
+                          <div [class]="'col-' + (department.regime == 1 ? 6 : 12)">
+                              <select-input label="Régime" name="regime" [(ngModel)]="department.regime" [options]="REGIME_OPTIONS"></select-input>
+                          </div>
+                          <div class="col-6" *ngIf="department.regime == 1">
+                              <text-input label="Nombre de Périodes" name="periods" type="number" [(ngModel)]="department.periods"></text-input>
+                          </div>
+                        </div>
+                      
+                        <date-range *ngFor="let range of department.ranges; let i = index;" [ngModel]="range" (ngModelChange)="department.ranges[i].start = $event.start; department.ranges[i].end = $event.end" [required]="true"
+                          [label]="(department.regime == 3 ? 'Trimèstre' : (department.regime == 2 ? 'Semèstre' : 'Période')) + ' ' + (i + 1)" name="dept-{{index}}-range-{{i}}-manual"></date-range>
+                      </div>
+                  </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+  
+            <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+              Soumettre
+            </button>
+          </form>
+          <school-year-form-preview-dialog #previewDialog></school-year-form-preview-dialog>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    
+      
+      

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-alert #alert></app-alert>
+      </div>
+      <div class="col-12">
+        <form #formCtrl="ngForm">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-12">
+                <text-input [(ngModel)]="entity.name" 
+                  label="Nom"
+                  name="name" [required]="true">
+                </text-input>
+              </div>
+              <div class="col-12">
+                <text-input [(ngModel)]="entity.acronym" 
+                  label="Acronyme"
+                  name="acronym" [required]="true">
+                </text-input>
+              </div>
+              <div class="col-12">
+                <text-input type="email" [(ngModel)]="entity.email" name="email"
+                  label="Adresse E-mail">
+                </text-input>
+              </div>
+              <div class="col-12">
+                <text-input type="phone" [(ngModel)]="entity.phone" name="phone"
+                  label="Numéro de Téléphone">
+                </text-input>
+              </div>
+              <div class="col-12">
+                <text-area [(ngModel)]="entity.about" name="about"
+                  label="À Propos"
+                  placeholder="Entrer une description, des remarques ou des informations additionnelles ici..."
+                  [rows]="5">
+                </text-area>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-block btn-lg my-3" (click)="submit()">
+              Soumettre
+            </button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+    
+      
+      

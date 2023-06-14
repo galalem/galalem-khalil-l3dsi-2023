@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-alert #alert></app-alert>
+        </div>
+        <div class="col-12 text-center p-4" *ngIf="!evaluation">
+            <img style="max-width: 300px;width: 50%;" src="assets/img/sprites/undraw_exams.svg" alt="">
+            <h2 style="color: #343A40">Aucune session disponible</h2>
+        </div>
+        <div class="col-12" *ngIf="evaluation">
+            <div
+                class="info-box bg-{{percent < 25 ? 'danger' : (percent < 50 ? 'warning' : (percent < 75 ? 'success' : 'info'))}}">
+                <span class="info-box-icon"><ngx-fa-icon icon="ranking-star" /></span>
+                <div class="info-box-content">
+                    <span class="info-box-text"><strong>{{evaluation?.label}}</strong>, date limite de remise des notes <strong>{{evaluation?.deadline}}</strong></span>
+                    <span class="info-box-number">{{percent}}%</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{percent}}%"></div>
+                    </div>
+                    <span class="progress-description">
+                        {{grades}} sur {{total}} notes sont remises
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12" *ngIf="evaluation">
+            <data-table [source]="list" [config]="dataTableConfig"/>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NGX</string>
+    <string name="title_activity_main">NGX</string>
+    <string name="package_name">com.ngx.app</string>
+    <string name="custom_url_scheme">com.ngx.app</string>
+</resources>

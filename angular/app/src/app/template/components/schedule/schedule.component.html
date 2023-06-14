@@ -1,0 +1,22 @@
+<div style="overflow-x: auto;">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center" *ngFor="let timeHeader of timeHeaders">
+                    {{timeHeader}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let day of days; let i=index">
+                <th>{{day}}</th>
+                <td *ngFor="let timeHeader of timeHeaders"></td>
+                <div class="cell" [class.fortnight-a]="cell.fortnight === 'A'" [class.fortnight-b]="cell.fortnight === 'B'" [style]="'--span: ' + cell.span + '; --left: ' + cell.left + '; --background: ' + cell.background + '; color: ' + cell.color + '; border-color: ' + cell.color + '22;'" *ngFor="let cell of cells[i]">
+                    <strong style="line-height: 1.65;">{{cell.subject}}</strong>
+                    <span style="font-size: 90%;">{{cell.target}}<br>
+                    {{cell.place}}</span>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,47 @@
+.mat-column-select {
+    width: 22px;
+    border-right: 2px solid rgba(0, 0, 0, 0.125);
+    padding: 0px 8px;
+    text-align: center;
+    background-color: #f8f9fa !important;
+}
+
+.smooth-select .mat-column-select {
+    border-right: none;
+    background-color: transparent !important;
+}
+
+.mat-column-select + td, .mat-column-select + th {
+    padding-left: 24px;
+}
+
+.card-header .btn {
+    color: white;
+}
+.card-header .btn-default {
+    color: #444;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+.card-footer {
+    padding: 0 !important;
+    background-color: #f8f9fa !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.filter-input {
+    width:15em; 
+    background-color: #fdfeff; 
+    border: 1px solid #828282; 
+    border-radius: 4px; 
+    padding: 0.25rem;
+}
+
+.filter-input:active,
+.filter-input:focus {
+    color: #1f2d3d;
+    border: 1px solid #1f2d3d; 
+    outline: none;
+}

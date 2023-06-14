@@ -1,0 +1,20 @@
+<button [disabled]="disabled" class="btn btn-light rounded-0 rounded-left" [matMenuTriggerFor]="departmentsDropdown.menu">{{contextButtonGroup.department || "Dep"}}</button>
+<dropdown-menu #departmentsDropdown="dropdown" [items]="departmentsDropdownItems">
+    <div dropdown-header>
+        <span class="dropdown-item dropdown-header">Département</span>
+    </div>
+</dropdown-menu>
+
+<button [disabled]="disabled" class="btn btn-light rounded-0" [matMenuTriggerFor]="periodsDropdown.menu">{{contextButtonGroup.period || "P"}}</button>
+<dropdown-menu #periodsDropdown="dropdown" [items]="periodsDropdownItems">
+    <div dropdown-header>
+        <span class="dropdown-item dropdown-header">Période</span>
+    </div>
+</dropdown-menu>
+
+<button [disabled]="disabled" class="btn btn-light rounded-0 rounded-right" [matMenuTriggerFor]="yearsDropdown.menu">{{contextButtonGroup.year || "20XX-20XX"}}</button>
+<dropdown-menu #yearsDropdown="dropdown" [items]="yearsDropdownItems">
+    <div dropdown-header>
+        <span class="dropdown-item dropdown-header">Année Scolaire</span>
+    </div>
+</dropdown-menu>

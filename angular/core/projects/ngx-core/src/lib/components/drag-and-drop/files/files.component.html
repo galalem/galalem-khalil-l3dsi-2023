@@ -1,0 +1,26 @@
+<div class="d-flex w-100" style="flex-direction: column;">
+    <div class="dropzone" style="min-height: 12rem;"
+        [class.file-over]="fileOver"
+        [class.error]="fileError"
+        (dragover)="onDragover($event)"
+        (dragleave)="onDragleave($event)"
+        (drop)="onDrop($event)"
+        (click)="onClick($event)">
+
+        <img src="assets/img/ic-upload-file.svg" alt="img"/>
+        <span class="text-sm my-4">Faites glisser et déposez vos fichier ici ou cliquez pour télécharger</span>
+
+        <input #container type="file" [accept]="accept" [multiple]="multiple" (change)="onChanged($event)" [name]="name"/>
+        <input #temporary type="file" [accept]="accept" [multiple]="multiple" (change)="onSelect($event)"/>
+    </div>
+    <div class="text-danger text-sm" style="height: 1.5rem;">
+        <div>{{error}}</div>
+    </div>
+</div>
+<div class="callout callout-info p-1 my-1" *ngFor="let file of value">
+    <div class="d-flex w-100" style="align-items: center;">
+        <img [src]="getFileIcon(file)" class="mr-2" style="width: 1.5em;">
+        <span class="filename">{{file.name}}</span>
+        <button class="btn text-danger ml-2" (click)="pluck(file)">&times;</button>
+    </div>
+</div>

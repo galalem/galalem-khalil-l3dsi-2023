@@ -1,0 +1,7 @@
+keycloak:
+  resource: news
+  credentials:
+    secret: REST_API_SECRET_KEY_HERE
+one-signal:
+  app-id: ONE_SIGNAL_APP_ID_HERE
+  rest-key: ONE_SIGNAL_REST_KEY_HERE

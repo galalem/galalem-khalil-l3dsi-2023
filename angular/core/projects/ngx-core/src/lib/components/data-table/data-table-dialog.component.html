@@ -1,0 +1,92 @@
+<div mat-dialog-content style="padding: 0;" class="smooth-select">
+  <div class="card-header">
+    <h3 class="card-title text-dark" style="line-height: 1.5;">
+      <button class="btn btn-sm mx-1 text-dark" [matMenuTriggerFor]="displayedColumnsDropdown.menu"><ngx-fa-icon icon="list" class="mr-1"></ngx-fa-icon></button>
+      <dropdown-menu #displayedColumnsDropdown="dropdown" [items]="displayedColumnsMenu">
+        <div dropdown-header><span class="dropdown-item dropdown-header">Colonnes Visibles</span></div>
+      </dropdown-menu>
+      {{config.title}} 
+      <span class="text-condensed text-muted pl-1" *ngIf="config.selection && selection.selected.length"> &#x2022; {{selection.selected.length}} sélectionnés</span>
+    </h3>
+  </div>
+  <div class="card-header p-0 no-print">
+    <mat-expansion-panel style="border-radius: 0; box-shadow: none;" hideToggle (opened)="filtersOpen = true" (closed)="filtersOpen = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <ngx-fa-icon icon="angles-right" class="mr-2" [rotate]="filtersOpen ? 90 : undefined"></ngx-fa-icon> Filtres de Recherche <span class="text-condensed text-muted pl-1"> &#x2022; {{dataSource.filteredData.length}} résultats trouvés</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-12" *ngIf="filters.length === 0">
+          [ aucun filtre est disponible ]
+        </div>
+        <div *ngFor="let filter of filters" [class]="filter.classes">
+          <text-input *ngIf="filter.datatype == 'string'"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel">
+          </text-input>
+          <number-range *ngIf="filter.datatype == 'number'"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel">
+          </number-range>
+          <date-range *ngIf="filter.datatype == 'date'"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel"
+            start-placeholder="Date début" end-placeholder="Date fin">
+          </date-range>
+          <checkbox *ngIf="filter.datatype == 'boolean'"
+            [label-on]="filter.checkbox?.labelOn"
+            [label-off]="filter.checkbox?.labelOff"
+            [label-in]="filter.checkbox?.labelIn"
+            [indeterminate]="true"
+            [label]="filter.label"
+            [(ngModel)]="filter.ngModel">
+          </checkbox>
+        </div>
+        <div class="col-12" *ngIf="filters.length > 0">
+          <button class="btn btn-default btn-block" (click)="applyFilters()">Appliquer</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div class="card-body" style="overflow-x: auto;">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="select" *ngIf="config.selection">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox *ngIf="selectMultiple"
+                            (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="toggleRow(row)"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+        </ng-container>
+      
+        <!-- Column -->
+        <ng-container *ngFor="let coldef of config.columns" [matColumnDef]="coldef.ref">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!coldef.sortable"> {{coldef.label}} </th>
+          <td mat-cell *matCellDef="let element"> 
+            <span *ngIf="coldef.display != undefined" [innerHTML]="coldef.display(element[coldef.ref])"></span>
+            {{ coldef.display != undefined ? '' : element[coldef.ref]}} 
+          </td>
+        </ng-container>
+      
+        <!-- Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr *matNoDataRow><td [attr.colspan]="displayedColumns.length" style="padding: 1.5rem;"><empty></empty></td></tr>
+    </table>
+    <mat-paginator style="background: none;" *ngIf="config.pagination" [length]="50" [pageSizeOptions]="[5, 10, 20, 50, 100, 1000]" showFirstLastButtons aria-label="Sélectionner la page"></mat-paginator>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button class="ml-1 btn btn-sm btn-default" [mat-dialog-close]="false">Annuler</button>
+  <button class="ml-1 btn btn-sm btn-info" [mat-dialog-close]="true">Confirmer</button>
+</div>

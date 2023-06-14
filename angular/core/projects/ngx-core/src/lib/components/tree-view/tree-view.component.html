@@ -1,0 +1,21 @@
+<div part="native" class="tree-container" style="--grid-cols:{{columns}} {{styleNative}}">
+    <div class="tree-node" *ngFor="let node of data"
+     [class.root]="node.isRoot"
+     [class.parent]="node.isParent"
+     [class.extreme]="node.extreme"
+     [class.single]="node.single"
+     [class.left]="node.position === LEFT"
+     [class.center-left]="node.position === CENTER_LEFT"
+     [class.center]="node.position === CENTER"
+     [class.center-right]="node.position === CENTER_RIGHT"
+     [class.right]="node.position === RIGHT"
+     [style]="'grid-row-start: '+node.row+'; grid-column-start: '+node.column+'; grid-column-end: span '+node.leafs+';'">
+        <div class="tree-node-content">
+            <div class="arrow"><span></span></div>
+            <div class="node-content">
+                <ng-container *ngTemplateOutlet="content.template; context: {$implicit: node.value, id: node.id, value: node.value, parent: node.parent}"></ng-container>
+            </div>
+            <div class="line"></div>
+        </div>
+    </div>
+</div>

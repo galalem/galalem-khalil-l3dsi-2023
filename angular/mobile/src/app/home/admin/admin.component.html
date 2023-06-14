@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-12">
+        <!-- <app-alert #alert></app-alert> -->
+    </div>
+    <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{teachers}}</h3>
+                <p>Enseignants</p>
+            </div>
+            <div class="icon">
+                <ngx-fa-icon icon="user-tie"/>
+            </div>
+            <a [routerLink]="['/human-resources/teachers']" class="small-box-footer">En savoir plus <ngx-fa-icon icon="arrow-circle-right"/></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{students}}</h3>
+                <p>Élèves</p>
+            </div>
+            <div class="icon">
+                <ngx-fa-icon icon="user-graduate"/>
+            </div>
+            <a [routerLink]="['/human-resources/students']" class="small-box-footer">En savoir plus <ngx-fa-icon icon="arrow-circle-right"/></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{parents}}</h3>
+                <p>Parents</p>
+            </div>
+            <div class="icon">
+                <ngx-fa-icon icon="user-shield"/>
+            </div>
+            <a [routerLink]="['/human-resources/parents']" class="small-box-footer">En savoir plus <ngx-fa-icon icon="arrow-circle-right"/></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{staff}}</h3>
+                <p>Personnels</p>
+            </div>
+            <div class="icon">
+                <ngx-fa-icon icon="user-gear"/>
+            </div>
+            <a [routerLink]="['/human-resources/staff']" class="small-box-footer">En savoir plus <ngx-fa-icon icon="arrow-circle-right"/></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <div class="card bg-purple">
+            <div class="card-body text-lg p-5 d-flex align-items-center"
+                style="font-family: Corben; position: relative;">
+                <p>
+                    You have a brain in your head. You have feet in your shoes.<br>You can steer your destiny any
+                    direction
+                    you choose.
+                </p>
+                <span
+                    style="position: absolute; top: .05em; right: .05em; font-size: 10em; font-weight: bold; line-height: 0.5; opacity: 0.1;">&#750;</span>
+                <span
+                    style="position: absolute; bottom: .05em; left: .05em; font-size: 10em; font-weight: bold; line-height: 0.5; opacity: 0.1; transform: rotate(180deg);">&#750;</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <app-weather style="display: block; height: 100%;" [weathercode]="currentWeather.weathercode" [temperature]="currentWeather.temperature" [date]="currentWeather.time"></app-weather>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <mat-calendar></mat-calendar>
+    </div>
+    <div class="col-lg-3 col-sm-6 d-flex justify-content-center align-items-center pb-3">
+        <app-clock [time]="currentDate"></app-clock>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Ages des élèves
+                </h3>
+            </div>
+            <div class="card-body">
+                <canvas app-age-chart [data]="ages" id="age-chart-canvas" height="600" width="1758"
+                    style="display: block; width: 100%; aspect-ratio: 1758/600;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Sexes des élèves
+                </h3>
+            </div>
+            <div class="card-body">
+                <canvas app-gender-chart [data]="genders" id="gender-chart-canvas" height="600" width="600"
+                    style="display: block; width: 100%;"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
